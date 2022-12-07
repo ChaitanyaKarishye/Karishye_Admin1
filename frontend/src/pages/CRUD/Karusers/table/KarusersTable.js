@@ -56,6 +56,7 @@ const KarusersTable = () => {
 
   const [filters, setFilters] = React.useState([
     {label: 'Name', title: 'name'},{label: 'Surname', title: 'surname'},{label: 'Address', title: 'address'},{label: 'Gothram', title: 'gothram'},{label: 'Nakshatram', title: 'nakshatram'},{label: 'Email Id', title: 'email_id'},
+          {label: 'Kar Id', title: 'kar_id', number: 'true'},
 
   ]);
 
@@ -242,6 +243,13 @@ const KarusersTable = () => {
       { field: "gender",
 
       headerName: "Gender"
+      },
+
+      { field: "kar_id",
+
+        flex: 0.6,
+
+      headerName: "Kar Id"
       },
 
       {

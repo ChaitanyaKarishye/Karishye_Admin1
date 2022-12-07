@@ -62,6 +62,11 @@ module.exports = class KarusersDBApi {
     null
 ,
 
+    kar_id: data.kar_id
+    ||
+    null
+,
+
   importHash: data.importHash || null,
   createdById: currentUser.id,
   updatedById: currentUser.id,
@@ -124,6 +129,11 @@ module.exports = class KarusersDBApi {
 ,
 
         gender: data.gender
+        ||
+        null
+,
+
+        kar_id: data.kar_id
         ||
         null
 ,
@@ -303,6 +313,30 @@ module.exports = class KarusersDBApi {
             ...where,
             date_of_registration: {
               ...where.date_of_registration,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.kar_idRange) {
+        const [start, end] = filter.kar_idRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            kar_id: {
+              ...where.kar_id,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            kar_id: {
+              ...where.kar_id,
               [Op.lte]: end,
             },
           };

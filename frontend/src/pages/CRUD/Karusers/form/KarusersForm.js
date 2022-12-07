@@ -147,6 +147,13 @@ const KarusersForm = (props) => {
         />
       </Grid>
 
+      <Grid item>
+        <InputFormItem
+          name={'kar_id'}
+          schema={karusersFields}
+        />
+      </Grid>
+
   </Grid>
   <Grid container spacing={3} mt={2}>
     <Grid item>

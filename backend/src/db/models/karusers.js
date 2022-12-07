@@ -69,6 +69,11 @@ gender: {
 
       },
 
+kar_id: {
+        type: DataTypes.INTEGER,
+
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,

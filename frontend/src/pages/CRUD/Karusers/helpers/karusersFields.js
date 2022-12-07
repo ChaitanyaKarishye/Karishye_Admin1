@@ -96,6 +96,16 @@ const karusersFields = {
 
     },
 
+    kar_id: { type: 'int', label: 'Kar Id',
+
+    options: [
+
+    { value: 'value', label: 'value' },
+
+]
+
+    },
+
 }
 
 export default karusersFields;
