@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 const moment = require('moment');
 
 module.exports = function(sequelize, DataTypes) {
-  const puja_samagri_mappings = sequelize.define(
-    'puja_samagri_mappings',
+  const puja_models = sequelize.define(
+    'puja_models',
     {
       id: {
         type: DataTypes.UUID,
@@ -14,18 +14,41 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-puja_id: {
+kar_id: {
         type: DataTypes.INTEGER,
 
       },
 
-samagri_id: {
+duration: {
         type: DataTypes.INTEGER,
 
       },
 
-no_of_standard_qty: {
+pujari_cost: {
         type: DataTypes.INTEGER,
+
+      },
+
+no_of_pujaris: {
+        type: DataTypes.INTEGER,
+
+      },
+
+model_selling_price: {
+        type: DataTypes.INTEGER,
+
+      },
+
+advance_amount: {
+        type: DataTypes.INTEGER,
+
+      },
+
+is_popular_model: {
+        type: DataTypes.BOOLEAN,
+
+        allowNull: false,
+        defaultValue: false,
 
       },
 
@@ -42,17 +65,26 @@ no_of_standard_qty: {
     },
   );
 
-  puja_samagri_mappings.associate = (db) => {
+  puja_models.associate = (db) => {
 
-    db.puja_samagri_mappings.belongsTo(db.users, {
+    db.puja_models.belongsToMany(db.pujas, {
+      as: 'puja_id',
+      foreignKey: {
+        name: 'puja_models_puja_idId',
+      },
+      constraints: false,
+      through: 'puja_modelsPuja_idPujas',
+    });
+
+    db.puja_models.belongsTo(db.users, {
       as: 'createdBy',
     });
 
-    db.puja_samagri_mappings.belongsTo(db.users, {
+    db.puja_models.belongsTo(db.users, {
       as: 'updatedBy',
     });
   };
 
-  return puja_samagri_mappings;
+  return puja_models;
 };
 

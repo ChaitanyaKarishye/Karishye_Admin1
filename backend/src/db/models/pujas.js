@@ -37,8 +37,74 @@ language: {
 
       },
 
-duration_hrs: {
+kar_id: {
         type: DataTypes.INTEGER,
+
+      },
+
+region: {
+        type: DataTypes.TEXT,
+
+      },
+
+mode1: {
+        type: DataTypes.ENUM,
+
+        values: [
+
+"remote",
+
+"at_my_home",
+
+"near_my_home",
+
+"on_behalf"
+
+        ],
+
+      },
+
+videos: {
+        type: DataTypes.TEXT,
+
+      },
+
+images: {
+        type: DataTypes.TEXT,
+
+      },
+
+mode2: {
+        type: DataTypes.ENUM,
+
+        values: [
+
+"remote",
+
+"at_my_home",
+
+"near_my_home",
+
+"on_behalf"
+
+        ],
+
+      },
+
+mode3: {
+        type: DataTypes.ENUM,
+
+        values: [
+
+"remote",
+
+"at_my_home",
+
+"near_my_home",
+
+"on_behalf"
+
+        ],
 
       },
 

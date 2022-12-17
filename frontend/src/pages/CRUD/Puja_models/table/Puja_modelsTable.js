@@ -1,7 +1,10 @@
 // eslint-disable-next-line
-import * as dataFormat from 'pages/CRUD/Samagri/table/SamagriDataFormatters';
+import * as dataFormat from 'pages/CRUD/Puja_models/table/Puja_modelsDataFormatters';
 
-import actions from 'actions/samagri/samagriListActions';
+// eslint-disable-next-line
+import * as pujasDataFormat from 'pages/CRUD/Pujas/table/PujasDataFormatters';
+
+import actions from 'actions/puja_models/puja_modelsListActions';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
@@ -48,15 +51,15 @@ const useStyles = makeStyles({
   },
 });
 
-const SamagriTable = () => {
+const Puja_modelsTable = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const [width, setWidth] = React.useState(window.innerWidth);
 
   const [filters, setFilters] = React.useState([
-    {label: 'Name', title: 'name'},{label: 'Description', title: 'description'},
-          {label: 'Standard Qty', title: 'standard_qty', number: 'true'},{label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'Cost Price', title: 'cost_price', number: 'true'},{label: 'Pujari Selling Price', title: 'pujari_selling_price', number: 'true'},{label: 'Customer Mrp', title: 'customer_mrp', number: 'true'},
+
+          {label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'Duration', title: 'duration', number: 'true'},{label: 'Pujari Cost', title: 'pujari_cost', number: 'true'},{label: 'No Of Pujaris', title: 'no_of_pujaris', number: 'true'},{label: 'Model Selling Price', title: 'model_selling_price', number: 'true'},{label: 'Advance Amount', title: 'advance_amount', number: 'true'},
 
   ]);
 
@@ -67,10 +70,10 @@ const SamagriTable = () => {
   const [sortModel, setSortModel] = React.useState([]);
   const [selectionModel, setSelectionModel] = React.useState([]);
 
-  const count = useSelector((store) => store.samagri.list.count);
-  const modalOpen = useSelector((store) => store.samagri.list.modalOpen);
-  const rows = useSelector((store) => store.samagri.list.rows);
-  const idToDelete = useSelector((store) => store.samagri.list.idToDelete);
+  const count = useSelector((store) => store.puja_models.list.count);
+  const modalOpen = useSelector((store) => store.puja_models.list.modalOpen);
+  const rows = useSelector((store) => store.puja_models.list.rows);
+  const idToDelete = useSelector((store) => store.puja_models.list.idToDelete);
 
   const [rowsState, setRowsState] = React.useState({
     page: 0,
@@ -184,32 +187,6 @@ const SamagriTable = () => {
 
   const columns = [
 
-      { field: "name",
-
-        flex: 0.6,
-
-      headerName: "Name"
-      },
-
-      { field: "description",
-
-        flex: 0.6,
-
-      headerName: "Description"
-      },
-
-      { field: "standard_qty",
-
-        flex: 0.6,
-
-      headerName: "Standard Qty"
-      },
-
-      { field: "qty_units",
-
-      headerName: "Qty Units"
-      },
-
       { field: "kar_id",
 
         flex: 0.6,
@@ -217,30 +194,55 @@ const SamagriTable = () => {
       headerName: "Kar Id"
       },
 
-      { field: "cost_price",
+      { field: "puja_id",
+
+        sortable: false,
+        renderCell: (params) => pujasDataFormat.listFormatter(params.row[params.field], history, 'pujas'),
+        flex: 1,
+
+      headerName: "Puja Id"
+      },
+
+      { field: "duration",
 
         flex: 0.6,
 
-      headerName: "Cost Price"
+      headerName: "Duration"
       },
 
-      { field: "pujari_selling_price",
+      { field: "pujari_cost",
 
         flex: 0.6,
 
-      headerName: "Pujari Selling Price"
+      headerName: "Pujari Cost"
       },
 
-      { field: "customer_mrp",
+      { field: "no_of_pujaris",
 
         flex: 0.6,
 
-      headerName: "Customer Mrp"
+      headerName: "No Of Pujaris"
       },
 
-      { field: "karishye_provided",
+      { field: "model_selling_price",
 
-      headerName: "Karishye Provided"
+        flex: 0.6,
+
+      headerName: "Model Selling Price"
+      },
+
+      { field: "advance_amount",
+
+        flex: 0.6,
+
+      headerName: "Advance Amount"
+      },
+
+      { field: "is_popular_model",
+
+        renderCell: (params) => dataFormat.booleanFormatter(params.row),
+
+      headerName: "Is Popular Model"
       },
 
       {
@@ -249,15 +251,15 @@ const SamagriTable = () => {
         sortable: false,
         flex: 0.6,
         maxWidth: 80,
-        renderCell: (params) => <Actions classes={classes} entity="samagri" openModal={openModal} {...params} />,
+        renderCell: (params) => <Actions classes={classes} entity="puja_models" openModal={openModal} {...params} />,
       }
   ];
 
   return (
     <div>
-      <Widget title={<h4>{humanize('Samagri')}</h4>} disableWidgetMenu>
+      <Widget title={<h4>{humanize('Puja_models')}</h4>} disableWidgetMenu>
         <Box className={classes.actions}>
-          <Link to="/admin/samagri/new">
+          <Link to="/admin/puja_models/new">
             <Button variant='contained'>New</Button>
           </Link>
           <Button
@@ -401,7 +403,7 @@ const SamagriTable = () => {
             disableSelectionOnClick
             disableColumnMenu
             loading={loading}
-            onRowClick={(e) => {history.push(`/admin/samagri/${e.id}/edit`)}}
+            onRowClick={(e) => {history.push(`/admin/puja_models/${e.id}/edit`)}}
             autoHeight
           />
         </div>
@@ -412,11 +414,11 @@ const SamagriTable = () => {
             target={'_blank'}
             href={
               process.env.NODE_ENV === 'production'
-                ? window.location.origin + '/api-docs/#/Samagri'
-                : 'http://localhost:8080/api-docs/#/Samagri'
+                ? window.location.origin + '/api-docs/#/Puja_models'
+                : 'http://localhost:8080/api-docs/#/Puja_models'
             }
           >
-            API documentation for samagri
+            API documentation for puja_models
           </LinkMaterial>
         </div>
       </Widget>
@@ -432,4 +434,4 @@ const SamagriTable = () => {
   )
 }
 
-export default SamagriTable;
+export default Puja_modelsTable;

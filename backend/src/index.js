@@ -26,13 +26,15 @@ const pujari_applicationsRoutes = require('./routes/pujari_applications');
 
 const pujasRoutes = require('./routes/pujas');
 
-const puja_samagri_mappingsRoutes = require('./routes/puja_samagri_mappings');
-
 const samagriRoutes = require('./routes/samagri');
 
 const booking_samagri_mappingsRoutes = require('./routes/booking_samagri_mappings');
 
 const bookingsRoutes = require('./routes/bookings');
+
+const puja_modelsRoutes = require('./routes/puja_models');
+
+const puja_model_samagri_mappingsRoutes = require('./routes/puja_model_samagri_mappings');
 
 const options = {
   definition: {
@@ -95,13 +97,15 @@ app.use('/api/pujari_applications', passport.authenticate('jwt', {session: false
 
 app.use('/api/pujas', passport.authenticate('jwt', {session: false}), pujasRoutes);
 
-app.use('/api/puja_samagri_mappings', passport.authenticate('jwt', {session: false}), puja_samagri_mappingsRoutes);
-
 app.use('/api/samagri', passport.authenticate('jwt', {session: false}), samagriRoutes);
 
 app.use('/api/booking_samagri_mappings', passport.authenticate('jwt', {session: false}), booking_samagri_mappingsRoutes);
 
 app.use('/api/bookings', passport.authenticate('jwt', {session: false}), bookingsRoutes);
+
+app.use('/api/puja_models', passport.authenticate('jwt', {session: false}), puja_modelsRoutes);
+
+app.use('/api/puja_model_samagri_mappings', passport.authenticate('jwt', {session: false}), puja_model_samagri_mappingsRoutes);
 
 const publicDir = path.join(
   __dirname,

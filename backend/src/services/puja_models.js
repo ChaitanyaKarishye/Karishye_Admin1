@@ -1,11 +1,11 @@
 const db = require('../db/models');
-const Puja_samagri_mappingsDBApi = require('../db/api/puja_samagri_mappings');
+const Puja_modelsDBApi = require('../db/api/puja_models');
 
-module.exports = class Puja_samagri_mappingsService {
+module.exports = class Puja_modelsService {
   static async create(data, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
-      await Puja_samagri_mappingsDBApi.create(
+      await Puja_modelsDBApi.create(
         data,
         {
           currentUser,
@@ -22,18 +22,18 @@ module.exports = class Puja_samagri_mappingsService {
   static async update(data, id, currentUser) {
     const transaction = await db.sequelize.transaction();
     try {
-      let puja_samagri_mappings = await Puja_samagri_mappingsDBApi.findBy(
+      let puja_models = await Puja_modelsDBApi.findBy(
         {id},
         {transaction},
       );
 
-      if (!puja_samagri_mappings) {
+      if (!puja_models) {
         throw new ValidationError(
-          'puja_samagri_mappingsNotFound',
+          'puja_modelsNotFound',
         );
       }
 
-      await Puja_samagri_mappingsDBApi.update(
+      await Puja_modelsDBApi.update(
         id,
         data,
         {
@@ -43,7 +43,7 @@ module.exports = class Puja_samagri_mappingsService {
       );
 
       await transaction.commit();
-      return puja_samagri_mappings;
+      return puja_models;
 
     } catch (error) {
       await transaction.rollback();
@@ -61,7 +61,7 @@ module.exports = class Puja_samagri_mappingsService {
         );
       }
 
-      await Puja_samagri_mappingsDBApi.remove(
+      await Puja_modelsDBApi.remove(
         id,
         {
           currentUser,

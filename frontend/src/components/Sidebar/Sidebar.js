@@ -162,15 +162,6 @@ function Sidebar({ location, structure }) {
           />
 
           <SidebarLink
-            label="Puja samagri mappings"
-            link="/admin/puja_samagri_mappings"
-            location={location}
-            isSidebarOpened={isSidebarOpenedWrapper}
-            icon={<CoreIcon />}
-            toggleDrawer={toggleDrawer(true)}
-          />
-
-          <SidebarLink
             label="Samagri"
             link="/admin/samagri"
             location={location}
@@ -191,6 +182,24 @@ function Sidebar({ location, structure }) {
           <SidebarLink
             label="Bookings"
             link="/admin/bookings"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
+            label="Puja models"
+            link="/admin/puja_models"
+            location={location}
+            isSidebarOpened={isSidebarOpenedWrapper}
+            icon={<CoreIcon />}
+            toggleDrawer={toggleDrawer(true)}
+          />
+
+          <SidebarLink
+            label="Puja model samagri mappings"
+            link="/admin/puja_model_samagri_mappings"
             location={location}
             isSidebarOpened={isSidebarOpenedWrapper}
             icon={<CoreIcon />}

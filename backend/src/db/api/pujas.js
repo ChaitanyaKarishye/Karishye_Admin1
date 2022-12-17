@@ -32,7 +32,37 @@ module.exports = class PujasDBApi {
     null
 ,
 
-    duration_hrs: data.duration_hrs
+    kar_id: data.kar_id
+    ||
+    null
+,
+
+    region: data.region
+    ||
+    null
+,
+
+    mode1: data.mode1
+    ||
+    null
+,
+
+    videos: data.videos
+    ||
+    null
+,
+
+    images: data.images
+    ||
+    null
+,
+
+    mode2: data.mode2
+    ||
+    null
+,
+
+    mode3: data.mode3
     ||
     null
 ,
@@ -73,7 +103,37 @@ module.exports = class PujasDBApi {
         null
 ,
 
-        duration_hrs: data.duration_hrs
+        kar_id: data.kar_id
+        ||
+        null
+,
+
+        region: data.region
+        ||
+        null
+,
+
+        mode1: data.mode1
+        ||
+        null
+,
+
+        videos: data.videos
+        ||
+        null
+,
+
+        images: data.images
+        ||
+        null
+,
+
+        mode2: data.mode2
+        ||
+        null
+,
+
+        mode3: data.mode3
         ||
         null
 ,
@@ -167,14 +227,47 @@ module.exports = class PujasDBApi {
         };
       }
 
-      if (filter.duration_hrsRange) {
-        const [start, end] = filter.duration_hrsRange;
+      if (filter.region) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'pujas',
+            'region',
+            filter.region,
+          ),
+        };
+      }
+
+      if (filter.videos) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'pujas',
+            'videos',
+            filter.videos,
+          ),
+        };
+      }
+
+      if (filter.images) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'pujas',
+            'images',
+            filter.images,
+          ),
+        };
+      }
+
+      if (filter.kar_idRange) {
+        const [start, end] = filter.kar_idRange;
 
         if (start !== undefined && start !== null && start !== '') {
           where = {
             ...where,
-            duration_hrs: {
-              ...where.duration_hrs,
+            kar_id: {
+              ...where.kar_id,
               [Op.gte]: start,
             },
           };
@@ -183,8 +276,8 @@ module.exports = class PujasDBApi {
         if (end !== undefined && end !== null && end !== '') {
           where = {
             ...where,
-            duration_hrs: {
-              ...where.duration_hrs,
+            kar_id: {
+              ...where.kar_id,
               [Op.lte]: end,
             },
           };
@@ -209,6 +302,27 @@ module.exports = class PujasDBApi {
         where = {
           ...where,
           language: filter.language,
+        };
+      }
+
+      if (filter.mode1) {
+        where = {
+          ...where,
+          mode1: filter.mode1,
+        };
+      }
+
+      if (filter.mode2) {
+        where = {
+          ...where,
+          mode2: filter.mode2,
+        };
+      }
+
+      if (filter.mode3) {
+        where = {
+          ...where,
+          mode3: filter.mode3,
         };
       }
 

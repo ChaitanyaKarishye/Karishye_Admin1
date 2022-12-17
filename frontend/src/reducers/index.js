@@ -15,13 +15,15 @@ import pujari_applications from 'reducers/pujari_applications/pujari_application
 
 import pujas from 'reducers/pujas/pujasReducers';
 
-import puja_samagri_mappings from 'reducers/puja_samagri_mappings/puja_samagri_mappingsReducers';
-
 import samagri from 'reducers/samagri/samagriReducers';
 
 import booking_samagri_mappings from 'reducers/booking_samagri_mappings/booking_samagri_mappingsReducers';
 
 import bookings from 'reducers/bookings/bookingsReducers';
+
+import puja_models from 'reducers/puja_models/puja_modelsReducers';
+
+import puja_model_samagri_mappings from 'reducers/puja_model_samagri_mappings/puja_model_samagri_mappingsReducers';
 
 export default (history) =>
   combineReducers({
@@ -40,13 +42,15 @@ export default (history) =>
 
     pujas,
 
-    puja_samagri_mappings,
-
     samagri,
 
     booking_samagri_mappings,
 
     bookings,
+
+    puja_models,
+
+    puja_model_samagri_mappings,
 
   });
 

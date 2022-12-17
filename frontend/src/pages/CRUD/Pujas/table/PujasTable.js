@@ -55,8 +55,8 @@ const PujasTable = () => {
   const [width, setWidth] = React.useState(window.innerWidth);
 
   const [filters, setFilters] = React.useState([
-    {label: 'Name', title: 'name'},{label: 'Description', title: 'description'},
-          {label: 'Duration Hrs', title: 'duration_hrs', number: 'true'},
+    {label: 'Name', title: 'name'},{label: 'Description', title: 'description'},{label: 'Region', title: 'region'},{label: 'Images', title: 'images'},
+          {label: 'Kar Id', title: 'kar_id', number: 'true'},
 
   ]);
 
@@ -203,11 +203,40 @@ const PujasTable = () => {
       headerName: "Language"
       },
 
-      { field: "duration_hrs",
+      { field: "kar_id",
 
         flex: 0.6,
 
-      headerName: "Duration Hrs"
+      headerName: "Kar Id"
+      },
+
+      { field: "region",
+
+        flex: 0.6,
+
+      headerName: "Region"
+      },
+
+      { field: "mode1",
+
+      headerName: "Mode 1"
+      },
+
+      { field: "images",
+
+        flex: 0.6,
+
+      headerName: "Images"
+      },
+
+      { field: "mode2",
+
+      headerName: "Mode 2"
+      },
+
+      { field: "mode3",
+
+      headerName: "Mode 3"
       },
 
       {

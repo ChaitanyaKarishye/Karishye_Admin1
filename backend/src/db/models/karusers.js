@@ -74,6 +74,14 @@ kar_id: {
 
       },
 
+is_karishye_sourced: {
+        type: DataTypes.BOOLEAN,
+
+        allowNull: false,
+        defaultValue: false,
+
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,

@@ -108,21 +108,35 @@ const SamagriForm = (props) => {
 
       <Grid item>
         <InputFormItem
-          name={'price_standard_qty'}
-          schema={samagriFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <SwitchFormItem
-          name={'karishye_provided'}
+          name={'kar_id'}
           schema={samagriFields}
         />
       </Grid>
 
       <Grid item>
         <InputFormItem
-          name={'units_in_stock'}
+          name={'cost_price'}
+          schema={samagriFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'pujari_selling_price'}
+          schema={samagriFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'customer_mrp'}
+          schema={samagriFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <RadioFormItem
+          name={'karishye_provided'}
           schema={samagriFields}
         />
       </Grid>

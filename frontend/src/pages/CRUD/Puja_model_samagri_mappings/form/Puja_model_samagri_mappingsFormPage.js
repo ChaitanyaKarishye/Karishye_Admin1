@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Puja_samagri_mappingsForm from 'pages/CRUD/Puja_samagri_mappings/form/Puja_samagri_mappingsForm';
+import Puja_model_samagri_mappingsForm from 'pages/CRUD/Puja_model_samagri_mappings/form/Puja_model_samagri_mappingsForm';
 import { push } from 'connected-react-router';
-import actions from 'actions/puja_samagri_mappings/puja_samagri_mappingsFormActions';
+import actions from 'actions/puja_model_samagri_mappings/puja_model_samagri_mappingsFormActions';
 import { connect } from 'react-redux';
 
-const Puja_samagri_mappingsFormPage = (props) => {
+const Puja_model_samagri_mappingsFormPage = (props) => {
 
   const {
     dispatch,
@@ -51,7 +51,7 @@ const Puja_samagri_mappingsFormPage = (props) => {
   return (
     <React.Fragment>
       {dispatched && (
-        <Puja_samagri_mappingsForm
+        <Puja_model_samagri_mappingsForm
         saveLoading={saveLoading}
         findLoading={findLoading}
         currentUser={currentUser}
@@ -59,7 +59,7 @@ const Puja_samagri_mappingsFormPage = (props) => {
         isEditing={isEditing()}
         isProfile={isProfile()}
         onSubmit={doSubmit}
-        onCancel={() => dispatch(push('/admin/puja_samagri_mappings'))}
+        onCancel={() => dispatch(push('/admin/puja_model_samagri_mappings'))}
         />
         )}
     </React.Fragment>
@@ -68,11 +68,11 @@ const Puja_samagri_mappingsFormPage = (props) => {
 
 function mapStateToProps(store) {
   return {
-    findLoading: store.puja_samagri_mappings.form.findLoading,
-    saveLoading: store.puja_samagri_mappings.form.saveLoading,
-    record: store.puja_samagri_mappings.form.record,
+    findLoading: store.puja_model_samagri_mappings.form.findLoading,
+    saveLoading: store.puja_model_samagri_mappings.form.saveLoading,
+    record: store.puja_model_samagri_mappings.form.record,
     currentUser: store.auth.currentUser,
   };
 }
 
-export default connect(mapStateToProps)(Puja_samagri_mappingsFormPage);
+export default connect(mapStateToProps)(Puja_model_samagri_mappingsFormPage);

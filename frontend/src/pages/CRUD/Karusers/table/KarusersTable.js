@@ -252,6 +252,13 @@ const KarusersTable = () => {
       headerName: "Kar Id"
       },
 
+      { field: "is_karishye_sourced",
+
+        renderCell: (params) => dataFormat.booleanFormatter(params.row),
+
+      headerName: "Is Karishye Sourced"
+      },
+
       {
         field: 'id',
         headerName: 'Actions',

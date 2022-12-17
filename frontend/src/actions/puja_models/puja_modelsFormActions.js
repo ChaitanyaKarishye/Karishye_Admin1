@@ -7,21 +7,21 @@ import { showSnackbar } from '../../components/Snackbar';
 const actions = {
   doNew: () => {
     return {
-      type: 'PUJA_SAMAGRI_MAPPINGS_FORM_RESET',
+      type: 'PUJA_MODELS_FORM_RESET',
     };
   },
 
   doFind: (id) => async (dispatch) => {
     try {
       dispatch({
-        type: 'PUJA_SAMAGRI_MAPPINGS_FORM_FIND_STARTED',
+        type: 'PUJA_MODELS_FORM_FIND_STARTED',
       });
 
-      axios.get(`/puja_samagri_mappings/${id}`).then(res => {
+      axios.get(`/puja_models/${id}`).then(res => {
         const record = res.data;
 
         dispatch({
-          type: 'PUJA_SAMAGRI_MAPPINGS_FORM_FIND_SUCCESS',
+          type: 'PUJA_MODELS_FORM_FIND_SUCCESS',
           payload: record,
         });
       })
@@ -29,31 +29,31 @@ const actions = {
       Errors.handle(error);
 
       dispatch({
-        type: 'PUJA_SAMAGRI_MAPPINGS_FORM_FIND_ERROR',
+        type: 'PUJA_MODELS_FORM_FIND_ERROR',
       });
 
-      dispatch(push('/admin/puja_samagri_mappings'));
+      dispatch(push('/admin/puja_models'));
     }
   },
 
   doCreate: (values) => async (dispatch) => {
     try {
       dispatch({
-        type: 'PUJA_SAMAGRI_MAPPINGS_FORM_CREATE_STARTED',
+        type: 'PUJA_MODELS_FORM_CREATE_STARTED',
       });
 
-      axios.post('/puja_samagri_mappings', { data: values }).then(res => {
+      axios.post('/puja_models', { data: values }).then(res => {
         dispatch({
-          type: 'PUJA_SAMAGRI_MAPPINGS_FORM_CREATE_SUCCESS',
+          type: 'PUJA_MODELS_FORM_CREATE_SUCCESS',
         });
-        showSnackbar({ type: 'success', message: 'Puja_samagri_mappings created' });
-        dispatch(push('/admin/puja_samagri_mappings'));
+        showSnackbar({ type: 'success', message: 'Puja_models created' });
+        dispatch(push('/admin/puja_models'));
       })
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: 'PUJA_SAMAGRI_MAPPINGS_FORM_CREATE_ERROR',
+        type: 'PUJA_MODELS_FORM_CREATE_ERROR',
       });
     }
   },
@@ -64,28 +64,28 @@ const actions = {
   ) => {
     try {
       dispatch({
-        type: 'PUJA_SAMAGRI_MAPPINGS_FORM_UPDATE_STARTED',
+        type: 'PUJA_MODELS_FORM_UPDATE_STARTED',
       });
 
-      await axios.put(`/puja_samagri_mappings/${id}`, {id, data: values});
+      await axios.put(`/puja_models/${id}`, {id, data: values});
 
       dispatch(doInit());
 
       dispatch({
-        type: 'PUJA_SAMAGRI_MAPPINGS_FORM_UPDATE_SUCCESS',
+        type: 'PUJA_MODELS_FORM_UPDATE_SUCCESS',
       });
 
       if (isProfile) {
         showSnackbar({ type: 'success', message: 'Profile updated' });
       } else {
-        showSnackbar({ type: 'success', message: 'Puja_samagri_mappings updated' });
-        dispatch(push('/admin/puja_samagri_mappings'));
+        showSnackbar({ type: 'success', message: 'Puja_models updated' });
+        dispatch(push('/admin/puja_models'));
       }
     } catch (error) {
       Errors.handle(error);
 
       dispatch({
-        type: 'PUJA_SAMAGRI_MAPPINGS_FORM_UPDATE_ERROR',
+        type: 'PUJA_MODELS_FORM_UPDATE_ERROR',
       });
     }
   },

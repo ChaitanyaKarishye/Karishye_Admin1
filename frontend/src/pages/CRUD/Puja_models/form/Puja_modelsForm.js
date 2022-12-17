@@ -19,13 +19,15 @@ import ImagesFormItem from 'components/FormItems/items/ImagesFormItem';
 import FilesFormItem from 'components/FormItems/items/FilesFormItem';
 // eslint-disable-next-line no-unused-vars
 
-import puja_samagri_mappingsFields from 'pages/CRUD/Puja_samagri_mappings/helpers/puja_samagri_mappingsFields';
+import puja_modelsFields from 'pages/CRUD/Puja_models/helpers/puja_modelsFields';
 import IniValues from 'components/FormItems/iniValues';
 import PreparedValues from 'components/FormItems/preparedValues';
 import FormValidations from 'components/FormItems/formValidations';
 import Widget from 'components/Widget';
 
-const Puja_samagri_mappingsForm = (props) => {
+import PujasSelectItem from 'pages/CRUD/Pujas/helpers/PujasSelectItem';
+
+const Puja_modelsForm = (props) => {
 
   const {
   isEditing,
@@ -39,15 +41,15 @@ const Puja_samagri_mappingsForm = (props) => {
   } = props;
 
   const iniValues = () => {
-  return IniValues(puja_samagri_mappingsFields, record || {});
+  return IniValues(puja_modelsFields, record || {});
   }
 
   const formValidations = () => {
-  return FormValidations(puja_samagri_mappingsFields, record || {});
+  return FormValidations(puja_modelsFields, record || {});
   }
 
   const handleSubmit = (values) => {
-  const { id, ...data } = PreparedValues(puja_samagri_mappingsFields, values || {});
+  const { id, ...data } = PreparedValues(puja_modelsFields, values || {});
   onSubmit(id, data);
   };
 
@@ -57,8 +59,8 @@ const Puja_samagri_mappingsForm = (props) => {
   }
 
   return isEditing
-  ? 'Edit Puja_samagri_mappings'
-  : 'Add Puja_samagri_mappings';
+  ? 'Edit Puja_models'
+  : 'Add Puja_models';
   };
 
   const renderForm = () => (
@@ -74,22 +76,60 @@ const Puja_samagri_mappingsForm = (props) => {
 
       <Grid item>
         <InputFormItem
-          name={'puja_id'}
-          schema={puja_samagri_mappingsFields}
+          name={'kar_id'}
+          schema={puja_modelsFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <PujasSelectItem
+        name={'puja_id'}
+        schema={puja_modelsFields}
+        showCreate={!modal}
+        multiple
+        form={form}
         />
       </Grid>
 
       <Grid item>
         <InputFormItem
-          name={'samagri_id'}
-          schema={puja_samagri_mappingsFields}
+          name={'duration'}
+          schema={puja_modelsFields}
         />
       </Grid>
 
       <Grid item>
         <InputFormItem
-          name={'no_of_standard_qty'}
-          schema={puja_samagri_mappingsFields}
+          name={'pujari_cost'}
+          schema={puja_modelsFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'no_of_pujaris'}
+          schema={puja_modelsFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'model_selling_price'}
+          schema={puja_modelsFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <InputFormItem
+          name={'advance_amount'}
+          schema={puja_modelsFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <SwitchFormItem
+          name={'is_popular_model'}
+          schema={puja_modelsFields}
         />
       </Grid>
 
@@ -137,4 +177,4 @@ const Puja_samagri_mappingsForm = (props) => {
   }
   return renderForm();
   }
-  export default Puja_samagri_mappingsForm;
+  export default Puja_modelsForm;

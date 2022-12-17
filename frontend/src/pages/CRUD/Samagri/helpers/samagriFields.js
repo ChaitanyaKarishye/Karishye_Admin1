@@ -52,7 +52,7 @@ const samagriFields = {
 
     },
 
-    price_standard_qty: { type: 'int', label: 'Price Standard Qty',
+    kar_id: { type: 'int', label: 'Kar Id',
 
     options: [
 
@@ -62,7 +62,7 @@ const samagriFields = {
 
     },
 
-    karishye_provided: { type: 'boolean', label: 'Karishye Provided',
+    cost_price: { type: 'int', label: 'Cost Price',
 
     options: [
 
@@ -72,11 +72,35 @@ const samagriFields = {
 
     },
 
-    units_in_stock: { type: 'int', label: 'Units In Stock',
+    pujari_selling_price: { type: 'int', label: 'Pujari Selling Price',
 
     options: [
 
     { value: 'value', label: 'value' },
+
+]
+
+    },
+
+    customer_mrp: { type: 'int', label: 'Customer Mrp',
+
+    options: [
+
+    { value: 'value', label: 'value' },
+
+]
+
+    },
+
+    karishye_provided: { type: 'enum', label: 'Karishye Provided',
+
+    options: [
+
+    { value: 'stocks', label: 'stocks' },
+
+    { value: 'does_not_stock', label: 'does_not_stock' },
+
+    { value: 'does_not_stock_but_can_supply', label: 'does_not_stock_but_can_supply' },
 
 ]
 

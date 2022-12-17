@@ -1,8 +1,8 @@
 
 const express = require('express');
 
-const Puja_samagri_mappingsService = require('../services/puja_samagri_mappings');
-const Puja_samagri_mappingsDBApi = require('../db/api/puja_samagri_mappings');
+const Puja_modelsService = require('../services/puja_models');
+const Puja_modelsDBApi = require('../db/api/puja_models');
 const wrapAsync = require('../helpers').wrapAsync;
 
 const router = express.Router();
@@ -11,17 +11,26 @@ const router = express.Router();
  *  @swagger
  *  components:
  *    schemas:
- *      Puja_samagri_mappings:
+ *      Puja_models:
  *        type: object
  *        properties:
 
- *          puja_id:
+ *          kar_id:
  *            type: integer
  *            format: int64
- *          samagri_id:
+ *          duration:
  *            type: integer
  *            format: int64
- *          no_of_standard_qty:
+ *          pujari_cost:
+ *            type: integer
+ *            format: int64
+ *          no_of_pujaris:
+ *            type: integer
+ *            format: int64
+ *          model_selling_price:
+ *            type: integer
+ *            format: int64
+ *          advance_amount:
  *            type: integer
  *            format: int64
 
@@ -30,17 +39,17 @@ const router = express.Router();
 /**
  *  @swagger
  * tags:
- *   name: Puja_samagri_mappings
- *   description: The Puja_samagri_mappings managing API
+ *   name: Puja_models
+ *   description: The Puja_models managing API
  */
 
   /**
   *  @swagger
-  *  /api/puja_samagri_mappings:
+  *  /api/puja_models:
   *    post:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Puja_samagri_mappings]
+  *      tags: [Puja_models]
   *      summary: Add new item
   *      description: Add new item
   *      requestBody:
@@ -52,14 +61,14 @@ const router = express.Router();
   *                data:
   *                  description: Data of the updated item
   *                  type: object
-  *                  $ref: "#/components/schemas/Puja_samagri_mappings"
+  *                  $ref: "#/components/schemas/Puja_models"
   *      responses:
   *        200:
   *          description: The item was successfully added
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Puja_samagri_mappings"
+  *                $ref: "#/components/schemas/Puja_models"
   *        401:
   *          $ref: "#/components/responses/UnauthorizedError"
   *        405:
@@ -69,18 +78,18 @@ const router = express.Router();
   */
 
 router.post('/', async (req, res) => {
-    await Puja_samagri_mappingsService.create(req.body.data, req.currentUser, true, req.headers.referer);
+    await Puja_modelsService.create(req.body.data, req.currentUser, true, req.headers.referer);
     const payload = true;
     res.status(200).send(payload);
 });
 
   /**
   *  @swagger
-  *  /api/puja_samagri_mappings/{id}:
+  *  /api/puja_models/{id}:
   *    put:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Puja_samagri_mappings]
+  *      tags: [Puja_models]
   *      summary: Update the data of the selected item
   *      description: Update the data of the selected item
   *      parameters:
@@ -103,7 +112,7 @@ router.post('/', async (req, res) => {
   *                data:
   *                  description: Data of the updated item
   *                  type: object
-  *                  $ref: "#/components/schemas/Puja_samagri_mappings"
+  *                  $ref: "#/components/schemas/Puja_models"
   *              required:
   *                - id
   *      responses:
@@ -112,7 +121,7 @@ router.post('/', async (req, res) => {
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Puja_samagri_mappings"
+  *                $ref: "#/components/schemas/Puja_models"
   *        400:
   *          description: Invalid ID supplied
   *        401:
@@ -124,18 +133,18 @@ router.post('/', async (req, res) => {
   */
 
 router.put('/:id', wrapAsync(async (req, res) => {
-  await Puja_samagri_mappingsService.update(req.body.data, req.body.id, req.currentUser);
+  await Puja_modelsService.update(req.body.data, req.body.id, req.currentUser);
   const payload = true;
   res.status(200).send(payload);
 }));
 
   /**
   * @swagger
-  *  /api/puja_samagri_mappings/{id}:
+  *  /api/puja_models/{id}:
   *    delete:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Puja_samagri_mappings]
+  *      tags: [Puja_models]
   *      summary: Delete the selected item
   *      description: Delete the selected item
   *      parameters:
@@ -151,7 +160,7 @@ router.put('/:id', wrapAsync(async (req, res) => {
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Puja_samagri_mappings"
+  *                $ref: "#/components/schemas/Puja_models"
   *        400:
   *          description: Invalid ID supplied
   *        401:
@@ -163,29 +172,29 @@ router.put('/:id', wrapAsync(async (req, res) => {
   */
 
 router.delete('/:id', wrapAsync(async (req, res) => {
-  await Puja_samagri_mappingsService.remove(req.params.id, req.currentUser);
+  await Puja_modelsService.remove(req.params.id, req.currentUser);
   const payload = true;
   res.status(200).send(payload);
 }));
 
   /**
   *  @swagger
-  *  /api/puja_samagri_mappings:
+  *  /api/puja_models:
   *    get:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Puja_samagri_mappings]
-  *      summary: Get all puja_samagri_mappings
-  *      description: Get all puja_samagri_mappings
+  *      tags: [Puja_models]
+  *      summary: Get all puja_models
+  *      description: Get all puja_models
   *      responses:
   *        200:
-  *          description: Puja_samagri_mappings list successfully received
+  *          description: Puja_models list successfully received
   *          content:
   *            application/json:
   *              schema:
   *                type: array
   *                items:
-  *                  $ref: "#/components/schemas/Puja_samagri_mappings"
+  *                  $ref: "#/components/schemas/Puja_models"
   *        401:
   *          $ref: "#/components/responses/UnauthorizedError"
   *        404:
@@ -195,7 +204,7 @@ router.delete('/:id', wrapAsync(async (req, res) => {
   */
 
 router.get('/', wrapAsync(async (req, res) => {
-  const payload = await Puja_samagri_mappingsDBApi.findAll(
+  const payload = await Puja_modelsDBApi.findAll(
     req.query,
   );
 
@@ -203,7 +212,7 @@ router.get('/', wrapAsync(async (req, res) => {
 }));
 
 router.get('/autocomplete', async (req, res) => {
-  const payload = await Puja_samagri_mappingsDBApi.findAllAutocomplete(
+  const payload = await Puja_modelsDBApi.findAllAutocomplete(
     req.query.query,
     req.query.limit,
   );
@@ -213,11 +222,11 @@ router.get('/autocomplete', async (req, res) => {
 
   /**
   * @swagger
-  *  /api/puja_samagri_mappings/{id}:
+  *  /api/puja_models/{id}:
   *    get:
   *      security:
   *        - bearerAuth: []
-  *      tags: [Puja_samagri_mappings]
+  *      tags: [Puja_models]
   *      summary: Get selected item
   *      description: Get selected item
   *      parameters:
@@ -233,7 +242,7 @@ router.get('/autocomplete', async (req, res) => {
   *          content:
   *            application/json:
   *              schema:
-  *                $ref: "#/components/schemas/Puja_samagri_mappings"
+  *                $ref: "#/components/schemas/Puja_models"
   *        400:
   *          description: Invalid ID supplied
   *        401:
@@ -245,7 +254,7 @@ router.get('/autocomplete', async (req, res) => {
   */
 
 router.get('/:id', wrapAsync(async (req, res) => {
-  const payload = await Puja_samagri_mappingsDBApi.findBy(
+  const payload = await Puja_modelsDBApi.findBy(
     { id: req.params.id },
   );
 

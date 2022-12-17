@@ -21,11 +21,20 @@ const router = express.Router();
  *          description:
  *            type: string
  *            default: description
+ *          region:
+ *            type: string
+ *            default: region
+ *          images:
+ *            type: string
+ *            default: images
 
- *          duration_hrs:
+ *          kar_id:
  *            type: integer
  *            format: int64
 
+ *          
+ *          
+ *          
  *          
  */
 

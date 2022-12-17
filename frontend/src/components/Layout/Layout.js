@@ -49,9 +49,6 @@ import Pujari_applicationsTablePage from 'pages/CRUD/Pujari_applications/table/P
 import PujasFormPage from 'pages/CRUD/Pujas/form/PujasFormPage';
 import PujasTablePage from 'pages/CRUD/Pujas/table/PujasTablePage';
 
-import Puja_samagri_mappingsFormPage from 'pages/CRUD/Puja_samagri_mappings/form/Puja_samagri_mappingsFormPage';
-import Puja_samagri_mappingsTablePage from 'pages/CRUD/Puja_samagri_mappings/table/Puja_samagri_mappingsTablePage';
-
 import SamagriFormPage from 'pages/CRUD/Samagri/form/SamagriFormPage';
 import SamagriTablePage from 'pages/CRUD/Samagri/table/SamagriTablePage';
 
@@ -60,6 +57,12 @@ import Booking_samagri_mappingsTablePage from 'pages/CRUD/Booking_samagri_mappin
 
 import BookingsFormPage from 'pages/CRUD/Bookings/form/BookingsFormPage';
 import BookingsTablePage from 'pages/CRUD/Bookings/table/BookingsTablePage';
+
+import Puja_modelsFormPage from 'pages/CRUD/Puja_models/form/Puja_modelsFormPage';
+import Puja_modelsTablePage from 'pages/CRUD/Puja_models/table/Puja_modelsTablePage';
+
+import Puja_model_samagri_mappingsFormPage from 'pages/CRUD/Puja_model_samagri_mappings/form/Puja_model_samagri_mappingsFormPage';
+import Puja_model_samagri_mappingsTablePage from 'pages/CRUD/Puja_model_samagri_mappings/table/Puja_model_samagri_mappingsTablePage';
 
 const Redirect = (props) => {
   useEffect(() => window.location.replace(props.url))
@@ -126,10 +129,6 @@ function Layout(props) {
                     <Route path={"/admin/pujas/new"} exact component={PujasFormPage} />
                     <Route path={"/admin/pujas/:id/edit"} exact component={PujasFormPage} />
 
-                    <Route path={"/admin/puja_samagri_mappings"} exact component={Puja_samagri_mappingsTablePage} />
-                    <Route path={"/admin/puja_samagri_mappings/new"} exact component={Puja_samagri_mappingsFormPage} />
-                    <Route path={"/admin/puja_samagri_mappings/:id/edit"} exact component={Puja_samagri_mappingsFormPage} />
-
                     <Route path={"/admin/samagri"} exact component={SamagriTablePage} />
                     <Route path={"/admin/samagri/new"} exact component={SamagriFormPage} />
                     <Route path={"/admin/samagri/:id/edit"} exact component={SamagriFormPage} />
@@ -141,6 +140,14 @@ function Layout(props) {
                     <Route path={"/admin/bookings"} exact component={BookingsTablePage} />
                     <Route path={"/admin/bookings/new"} exact component={BookingsFormPage} />
                     <Route path={"/admin/bookings/:id/edit"} exact component={BookingsFormPage} />
+
+                    <Route path={"/admin/puja_models"} exact component={Puja_modelsTablePage} />
+                    <Route path={"/admin/puja_models/new"} exact component={Puja_modelsFormPage} />
+                    <Route path={"/admin/puja_models/:id/edit"} exact component={Puja_modelsFormPage} />
+
+                    <Route path={"/admin/puja_model_samagri_mappings"} exact component={Puja_model_samagri_mappingsTablePage} />
+                    <Route path={"/admin/puja_model_samagri_mappings/new"} exact component={Puja_model_samagri_mappingsFormPage} />
+                    <Route path={"/admin/puja_model_samagri_mappings/:id/edit"} exact component={Puja_model_samagri_mappingsFormPage} />
 
                 </Switch>
                 <Fab

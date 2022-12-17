@@ -23,15 +23,16 @@ const Dashboard = () => {
   const [pujaris, setPujaris] = useState(0);
   const [pujari_applications, setPujari_applications] = useState(0);
   const [pujas, setPujas] = useState(0);
-  const [puja_samagri_mappings, setPuja_samagri_mappings] = useState(0);
   const [samagri, setSamagri] = useState(0);
   const [booking_samagri_mappings, setBooking_samagri_mappings] = useState(0);
   const [bookings, setBookings] = useState(0);
+  const [puja_models, setPuja_models] = useState(0);
+  const [puja_model_samagri_mappings, setPuja_model_samagri_mappings] = useState(0);
 
   const [currentUser, setCurrentUser] = useState(null);
 
   async function loadData() {
-    const fns = [setUsers,setKarusers,setBooking_participants,setPujaris,setPujari_applications,setPujas,setPuja_samagri_mappings,setSamagri,setBooking_samagri_mappings,setBookings,];
+    const fns = [setUsers,setKarusers,setBooking_participants,setPujaris,setPujari_applications,setPujas,setSamagri,setBooking_samagri_mappings,setBookings,setPuja_models,setPuja_model_samagri_mappings,];
 
     const responseUsers = await axios.get(`/users`);
     const responseKarusers = await axios.get(`/karusers`);
@@ -39,11 +40,12 @@ const Dashboard = () => {
     const responsePujaris = await axios.get(`/pujaris`);
     const responsePujari_applications = await axios.get(`/pujari_applications`);
     const responsePujas = await axios.get(`/pujas`);
-    const responsePuja_samagri_mappings = await axios.get(`/puja_samagri_mappings`);
     const responseSamagri = await axios.get(`/samagri`);
     const responseBooking_samagri_mappings = await axios.get(`/booking_samagri_mappings`);
     const responseBookings = await axios.get(`/bookings`);
-      Promise.all([responseUsers,responseKarusers,responseBooking_participants,responsePujaris,responsePujari_applications,responsePujas,responsePuja_samagri_mappings,responseSamagri,responseBooking_samagri_mappings,responseBookings,])
+    const responsePuja_models = await axios.get(`/puja_models`);
+    const responsePuja_model_samagri_mappings = await axios.get(`/puja_model_samagri_mappings`);
+      Promise.all([responseUsers,responseKarusers,responseBooking_participants,responsePujaris,responsePujari_applications,responsePujas,responseSamagri,responseBooking_samagri_mappings,responseBookings,responsePuja_models,responsePuja_model_samagri_mappings,])
           .then((res) => res.map((el) => el.data))
           .then((data) => data.forEach((el, i) => fns[i](el.count)));
   }
@@ -173,22 +175,6 @@ const Dashboard = () => {
         </Grid>
 
     <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/puja_samagri_mappings'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Puja_samagri_mappings'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Puja_samagri_mappings: <span className={classes.widgetTextCount}>{puja_samagri_mappings}</span></p>
-            </div>
-          </Widget>
-        </Link>
-        </Grid>
-
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
         <Link to={'/admin/samagri'} style={{ textDecoration: 'none' }}>
           <Widget title={'Samagri'}>
             <div
@@ -231,6 +217,38 @@ const Dashboard = () => {
             >
               <InfoIcon color='primary' sx={{ mr: 1 }} />
               <p className={classes.widgetText}>Bookings: <span className={classes.widgetTextCount}>{bookings}</span></p>
+            </div>
+          </Widget>
+        </Link>
+        </Grid>
+
+    <Grid item xs={12} sm={6} lg={4} xl={3}>
+        <Link to={'/admin/puja_models'} style={{ textDecoration: 'none' }}>
+          <Widget title={'Puja_models'}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <InfoIcon color='primary' sx={{ mr: 1 }} />
+              <p className={classes.widgetText}>Puja_models: <span className={classes.widgetTextCount}>{puja_models}</span></p>
+            </div>
+          </Widget>
+        </Link>
+        </Grid>
+
+    <Grid item xs={12} sm={6} lg={4} xl={3}>
+        <Link to={'/admin/puja_model_samagri_mappings'} style={{ textDecoration: 'none' }}>
+          <Widget title={'Puja_model_samagri_mappings'}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <InfoIcon color='primary' sx={{ mr: 1 }} />
+              <p className={classes.widgetText}>Puja_model_samagri_mappings: <span className={classes.widgetTextCount}>{puja_model_samagri_mappings}</span></p>
             </div>
           </Widget>
         </Link>

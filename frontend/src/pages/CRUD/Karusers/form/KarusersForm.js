@@ -154,6 +154,13 @@ const KarusersForm = (props) => {
         />
       </Grid>
 
+      <Grid item>
+        <SwitchFormItem
+          name={'is_karishye_sourced'}
+          schema={karusersFields}
+        />
+      </Grid>
+
   </Grid>
   <Grid container spacing={3} mt={2}>
     <Grid item>

@@ -106,6 +106,16 @@ const karusersFields = {
 
     },
 
+    is_karishye_sourced: { type: 'boolean', label: 'Is Karishye Sourced',
+
+    options: [
+
+    { value: 'value', label: 'value' },
+
+]
+
+    },
+
 }
 
 export default karusersFields;

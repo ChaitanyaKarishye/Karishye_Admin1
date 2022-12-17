@@ -50,21 +50,38 @@ qty_units: {
 
       },
 
-price_standard_qty: {
+kar_id: {
+        type: DataTypes.INTEGER,
+
+      },
+
+cost_price: {
+        type: DataTypes.INTEGER,
+
+      },
+
+pujari_selling_price: {
+        type: DataTypes.INTEGER,
+
+      },
+
+customer_mrp: {
         type: DataTypes.INTEGER,
 
       },
 
 karishye_provided: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.ENUM,
 
-        allowNull: false,
-        defaultValue: false,
+        values: [
 
-      },
+"stocks",
 
-units_in_stock: {
-        type: DataTypes.INTEGER,
+"does_not_stock",
+
+"does_not_stock_but_can_supply"
+
+        ],
 
       },
 

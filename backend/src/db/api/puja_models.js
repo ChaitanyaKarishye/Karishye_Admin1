@@ -7,59 +7,50 @@ const Utils = require('../utils');
 const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
-module.exports = class SamagriDBApi {
+module.exports = class Puja_modelsDBApi {
 
   static async create(data, options) {
   const currentUser = (options && options.currentUser) || { id: null };
   const transaction = (options && options.transaction) || undefined;
 
-  const samagri = await db.samagri.create(
+  const puja_models = await db.puja_models.create(
   {
   id: data.id || undefined,
-
-    name: data.name
-    ||
-    null
-,
-
-    description: data.description
-    ||
-    null
-,
-
-    standard_qty: data.standard_qty
-    ||
-    null
-,
-
-    qty_units: data.qty_units
-    ||
-    null
-,
 
     kar_id: data.kar_id
     ||
     null
 ,
 
-    cost_price: data.cost_price
+    duration: data.duration
     ||
     null
 ,
 
-    pujari_selling_price: data.pujari_selling_price
+    pujari_cost: data.pujari_cost
     ||
     null
 ,
 
-    customer_mrp: data.customer_mrp
+    no_of_pujaris: data.no_of_pujaris
     ||
     null
 ,
 
-    karishye_provided: data.karishye_provided
+    model_selling_price: data.model_selling_price
     ||
     null
+,
+
+    advance_amount: data.advance_amount
+    ||
+    null
+,
+
+    is_popular_model: data.is_popular_model
+    ||
+    false
+
 ,
 
   importHash: data.importHash || null,
@@ -69,63 +60,58 @@ module.exports = class SamagriDBApi {
   { transaction },
   );
 
-  return samagri;
+    await puja_models.setPuja_id(data.puja_id || [], {
+    transaction,
+    });
+
+  return puja_models;
   }
 
   static async update(id, data, options) {
     const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
-    const samagri = await db.samagri.findByPk(id, {
+    const puja_models = await db.puja_models.findByPk(id, {
       transaction,
     });
 
-    await samagri.update(
+    await puja_models.update(
       {
-
-        name: data.name
-        ||
-        null
-,
-
-        description: data.description
-        ||
-        null
-,
-
-        standard_qty: data.standard_qty
-        ||
-        null
-,
-
-        qty_units: data.qty_units
-        ||
-        null
-,
 
         kar_id: data.kar_id
         ||
         null
 ,
 
-        cost_price: data.cost_price
+        duration: data.duration
         ||
         null
 ,
 
-        pujari_selling_price: data.pujari_selling_price
+        pujari_cost: data.pujari_cost
         ||
         null
 ,
 
-        customer_mrp: data.customer_mrp
+        no_of_pujaris: data.no_of_pujaris
         ||
         null
 ,
 
-        karishye_provided: data.karishye_provided
+        model_selling_price: data.model_selling_price
         ||
         null
+,
+
+        advance_amount: data.advance_amount
+        ||
+        null
+,
+
+        is_popular_model: data.is_popular_model
+        ||
+        false
+
 ,
 
         updatedById: currentUser.id,
@@ -133,41 +119,49 @@ module.exports = class SamagriDBApi {
       {transaction},
     );
 
-    return samagri;
+    await puja_models.setPuja_id(data.puja_id || [], {
+      transaction,
+    });
+
+    return puja_models;
   }
 
   static async remove(id, options) {
     const currentUser = (options && options.currentUser) || {id: null};
     const transaction = (options && options.transaction) || undefined;
 
-    const samagri = await db.samagri.findByPk(id, options);
+    const puja_models = await db.puja_models.findByPk(id, options);
 
-    await samagri.update({
+    await puja_models.update({
       deletedBy: currentUser.id
     }, {
       transaction,
     });
 
-    await samagri.destroy({
+    await puja_models.destroy({
       transaction
     });
 
-    return samagri;
+    return puja_models;
   }
 
   static async findBy(where, options) {
     const transaction = (options && options.transaction) || undefined;
 
-    const samagri = await db.samagri.findOne(
+    const puja_models = await db.puja_models.findOne(
       { where },
       { transaction },
     );
 
-    if (!samagri) {
-      return samagri;
+    if (!puja_models) {
+      return puja_models;
     }
 
-    const output = samagri.get({plain: true});
+    const output = puja_models.get({plain: true});
+
+    output.puja_id = await puja_models.getPuja_id({
+      transaction
+    });
 
     return output;
   }
@@ -185,6 +179,17 @@ module.exports = class SamagriDBApi {
     let where = {};
     let include = [
 
+      {
+        model: db.pujas,
+        as: 'puja_id',
+        through: filter.puja_id ? { where: {
+          [Op.or]: filter.puja_id.split('|').map(item => {
+            return { ['Id']: Utils.uuid(item) }
+          })
+        }} : null,
+        required: filter.puja_id ? true : null,
+      },
+
     ];
 
     if (filter) {
@@ -193,52 +198,6 @@ module.exports = class SamagriDBApi {
           ...where,
           ['id']: Utils.uuid(filter.id),
         };
-      }
-
-      if (filter.name) {
-        where = {
-          ...where,
-          [Op.and]: Utils.ilike(
-            'samagri',
-            'name',
-            filter.name,
-          ),
-        };
-      }
-
-      if (filter.description) {
-        where = {
-          ...where,
-          [Op.and]: Utils.ilike(
-            'samagri',
-            'description',
-            filter.description,
-          ),
-        };
-      }
-
-      if (filter.standard_qtyRange) {
-        const [start, end] = filter.standard_qtyRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          where = {
-            ...where,
-            standard_qty: {
-              ...where.standard_qty,
-              [Op.gte]: start,
-            },
-          };
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          where = {
-            ...where,
-            standard_qty: {
-              ...where.standard_qty,
-              [Op.lte]: end,
-            },
-          };
-        }
       }
 
       if (filter.kar_idRange) {
@@ -265,14 +224,14 @@ module.exports = class SamagriDBApi {
         }
       }
 
-      if (filter.cost_priceRange) {
-        const [start, end] = filter.cost_priceRange;
+      if (filter.durationRange) {
+        const [start, end] = filter.durationRange;
 
         if (start !== undefined && start !== null && start !== '') {
           where = {
             ...where,
-            cost_price: {
-              ...where.cost_price,
+            duration: {
+              ...where.duration,
               [Op.gte]: start,
             },
           };
@@ -281,22 +240,22 @@ module.exports = class SamagriDBApi {
         if (end !== undefined && end !== null && end !== '') {
           where = {
             ...where,
-            cost_price: {
-              ...where.cost_price,
+            duration: {
+              ...where.duration,
               [Op.lte]: end,
             },
           };
         }
       }
 
-      if (filter.pujari_selling_priceRange) {
-        const [start, end] = filter.pujari_selling_priceRange;
+      if (filter.pujari_costRange) {
+        const [start, end] = filter.pujari_costRange;
 
         if (start !== undefined && start !== null && start !== '') {
           where = {
             ...where,
-            pujari_selling_price: {
-              ...where.pujari_selling_price,
+            pujari_cost: {
+              ...where.pujari_cost,
               [Op.gte]: start,
             },
           };
@@ -305,22 +264,22 @@ module.exports = class SamagriDBApi {
         if (end !== undefined && end !== null && end !== '') {
           where = {
             ...where,
-            pujari_selling_price: {
-              ...where.pujari_selling_price,
+            pujari_cost: {
+              ...where.pujari_cost,
               [Op.lte]: end,
             },
           };
         }
       }
 
-      if (filter.customer_mrpRange) {
-        const [start, end] = filter.customer_mrpRange;
+      if (filter.no_of_pujarisRange) {
+        const [start, end] = filter.no_of_pujarisRange;
 
         if (start !== undefined && start !== null && start !== '') {
           where = {
             ...where,
-            customer_mrp: {
-              ...where.customer_mrp,
+            no_of_pujaris: {
+              ...where.no_of_pujaris,
               [Op.gte]: start,
             },
           };
@@ -329,8 +288,56 @@ module.exports = class SamagriDBApi {
         if (end !== undefined && end !== null && end !== '') {
           where = {
             ...where,
-            customer_mrp: {
-              ...where.customer_mrp,
+            no_of_pujaris: {
+              ...where.no_of_pujaris,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.model_selling_priceRange) {
+        const [start, end] = filter.model_selling_priceRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            model_selling_price: {
+              ...where.model_selling_price,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            model_selling_price: {
+              ...where.model_selling_price,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.advance_amountRange) {
+        const [start, end] = filter.advance_amountRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            advance_amount: {
+              ...where.advance_amount,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            advance_amount: {
+              ...where.advance_amount,
               [Op.lte]: end,
             },
           };
@@ -351,17 +358,10 @@ module.exports = class SamagriDBApi {
         };
       }
 
-      if (filter.qty_units) {
+      if (filter.is_popular_model) {
         where = {
           ...where,
-          qty_units: filter.qty_units,
-        };
-      }
-
-      if (filter.karishye_provided) {
-        where = {
-          ...where,
-          karishye_provided: filter.karishye_provided,
+          is_popular_model: filter.is_popular_model,
         };
       }
 
@@ -390,7 +390,7 @@ module.exports = class SamagriDBApi {
       }
     }
 
-    let { rows, count } = await db.samagri.findAndCountAll(
+    let { rows, count } = await db.puja_models.findAndCountAll(
       {
         where,
         include,
@@ -420,7 +420,7 @@ module.exports = class SamagriDBApi {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
           Utils.ilike(
-            'samagri',
+            'puja_models',
             'id',
             query,
           ),
@@ -428,7 +428,7 @@ module.exports = class SamagriDBApi {
       };
     }
 
-    const records = await db.samagri.findAll({
+    const records = await db.puja_models.findAll({
       attributes: [ 'id', 'id' ],
       where,
       limit: limit ? Number(limit) : undefined,

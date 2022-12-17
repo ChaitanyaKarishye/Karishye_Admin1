@@ -67,6 +67,12 @@ module.exports = class KarusersDBApi {
     null
 ,
 
+    is_karishye_sourced: data.is_karishye_sourced
+    ||
+    false
+
+,
+
   importHash: data.importHash || null,
   createdById: currentUser.id,
   updatedById: currentUser.id,
@@ -136,6 +142,12 @@ module.exports = class KarusersDBApi {
         kar_id: data.kar_id
         ||
         null
+,
+
+        is_karishye_sourced: data.is_karishye_sourced
+        ||
+        false
+
 ,
 
         updatedById: currentUser.id,
@@ -361,6 +373,13 @@ module.exports = class KarusersDBApi {
         where = {
           ...where,
           gender: filter.gender,
+        };
+      }
+
+      if (filter.is_karishye_sourced) {
+        where = {
+          ...where,
+          is_karishye_sourced: filter.is_karishye_sourced,
         };
       }
 

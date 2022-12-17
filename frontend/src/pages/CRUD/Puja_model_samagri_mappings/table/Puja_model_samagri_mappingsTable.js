@@ -1,7 +1,12 @@
 // eslint-disable-next-line
-import * as dataFormat from 'pages/CRUD/Puja_samagri_mappings/table/Puja_samagri_mappingsDataFormatters';
+import * as dataFormat from 'pages/CRUD/Puja_model_samagri_mappings/table/Puja_model_samagri_mappingsDataFormatters';
 
-import actions from 'actions/puja_samagri_mappings/puja_samagri_mappingsListActions';
+// eslint-disable-next-line
+import * as puja_modelsDataFormat from 'pages/CRUD/Puja_models/table/Puja_modelsDataFormatters';
+// eslint-disable-next-line
+import * as samagriDataFormat from 'pages/CRUD/Samagri/table/SamagriDataFormatters';
+
+import actions from 'actions/puja_model_samagri_mappings/puja_model_samagri_mappingsListActions';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
@@ -48,7 +53,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Puja_samagri_mappingsTable = () => {
+const Puja_model_samagri_mappingsTable = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -56,7 +61,7 @@ const Puja_samagri_mappingsTable = () => {
 
   const [filters, setFilters] = React.useState([
 
-          {label: 'Puja Id', title: 'puja_id', number: 'true'},{label: 'Samagri Id', title: 'samagri_id', number: 'true'},{label: 'No Of Standard Qty', title: 'no_of_standard_qty', number: 'true'},
+          {label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'No Of Standard Qty', title: 'no_of_standard_qty', number: 'true'},
 
   ]);
 
@@ -67,10 +72,10 @@ const Puja_samagri_mappingsTable = () => {
   const [sortModel, setSortModel] = React.useState([]);
   const [selectionModel, setSelectionModel] = React.useState([]);
 
-  const count = useSelector((store) => store.puja_samagri_mappings.list.count);
-  const modalOpen = useSelector((store) => store.puja_samagri_mappings.list.modalOpen);
-  const rows = useSelector((store) => store.puja_samagri_mappings.list.rows);
-  const idToDelete = useSelector((store) => store.puja_samagri_mappings.list.idToDelete);
+  const count = useSelector((store) => store.puja_model_samagri_mappings.list.count);
+  const modalOpen = useSelector((store) => store.puja_model_samagri_mappings.list.modalOpen);
+  const rows = useSelector((store) => store.puja_model_samagri_mappings.list.rows);
+  const idToDelete = useSelector((store) => store.puja_model_samagri_mappings.list.idToDelete);
 
   const [rowsState, setRowsState] = React.useState({
     page: 0,
@@ -184,16 +189,27 @@ const Puja_samagri_mappingsTable = () => {
 
   const columns = [
 
-      { field: "puja_id",
+      { field: "kar_id",
 
         flex: 0.6,
 
-      headerName: "Puja Id"
+      headerName: "Kar Id"
+      },
+
+      { field: "model_id",
+
+        sortable: false,
+        renderCell: (params) => puja_modelsDataFormat.listFormatter(params.row[params.field], history, 'puja_models'),
+        flex: 1,
+
+      headerName: "Model Id"
       },
 
       { field: "samagri_id",
 
-        flex: 0.6,
+        sortable: false,
+        renderCell: (params) => samagriDataFormat.listFormatter(params.row[params.field], history, 'samagri'),
+        flex: 1,
 
       headerName: "Samagri Id"
       },
@@ -211,15 +227,15 @@ const Puja_samagri_mappingsTable = () => {
         sortable: false,
         flex: 0.6,
         maxWidth: 80,
-        renderCell: (params) => <Actions classes={classes} entity="puja_samagri_mappings" openModal={openModal} {...params} />,
+        renderCell: (params) => <Actions classes={classes} entity="puja_model_samagri_mappings" openModal={openModal} {...params} />,
       }
   ];
 
   return (
     <div>
-      <Widget title={<h4>{humanize('Puja_samagri_mappings')}</h4>} disableWidgetMenu>
+      <Widget title={<h4>{humanize('Puja_model_samagri_mappings')}</h4>} disableWidgetMenu>
         <Box className={classes.actions}>
-          <Link to="/admin/puja_samagri_mappings/new">
+          <Link to="/admin/puja_model_samagri_mappings/new">
             <Button variant='contained'>New</Button>
           </Link>
           <Button
@@ -363,7 +379,7 @@ const Puja_samagri_mappingsTable = () => {
             disableSelectionOnClick
             disableColumnMenu
             loading={loading}
-            onRowClick={(e) => {history.push(`/admin/puja_samagri_mappings/${e.id}/edit`)}}
+            onRowClick={(e) => {history.push(`/admin/puja_model_samagri_mappings/${e.id}/edit`)}}
             autoHeight
           />
         </div>
@@ -374,11 +390,11 @@ const Puja_samagri_mappingsTable = () => {
             target={'_blank'}
             href={
               process.env.NODE_ENV === 'production'
-                ? window.location.origin + '/api-docs/#/Puja_samagri_mappings'
-                : 'http://localhost:8080/api-docs/#/Puja_samagri_mappings'
+                ? window.location.origin + '/api-docs/#/Puja_model_samagri_mappings'
+                : 'http://localhost:8080/api-docs/#/Puja_model_samagri_mappings'
             }
           >
-            API documentation for puja_samagri_mappings
+            API documentation for puja_model_samagri_mappings
           </LinkMaterial>
         </div>
       </Widget>
@@ -394,4 +410,4 @@ const Puja_samagri_mappingsTable = () => {
   )
 }
 
-export default Puja_samagri_mappingsTable;
+export default Puja_model_samagri_mappingsTable;
