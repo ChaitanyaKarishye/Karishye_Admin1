@@ -69,11 +69,6 @@ gender: {
 
       },
 
-kar_id: {
-        type: DataTypes.INTEGER,
-
-      },
-
 is_karishye_sourced: {
         type: DataTypes.BOOLEAN,
 

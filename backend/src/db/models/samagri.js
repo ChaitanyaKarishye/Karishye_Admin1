@@ -50,11 +50,6 @@ qty_units: {
 
       },
 
-kar_id: {
-        type: DataTypes.INTEGER,
-
-      },
-
 cost_price: {
         type: DataTypes.INTEGER,
 

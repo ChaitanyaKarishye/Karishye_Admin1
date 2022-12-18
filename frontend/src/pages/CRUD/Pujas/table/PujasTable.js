@@ -56,7 +56,6 @@ const PujasTable = () => {
 
   const [filters, setFilters] = React.useState([
     {label: 'Name', title: 'name'},{label: 'Description', title: 'description'},{label: 'Region', title: 'region'},{label: 'Images', title: 'images'},
-          {label: 'Kar Id', title: 'kar_id', number: 'true'},
 
   ]);
 
@@ -201,13 +200,6 @@ const PujasTable = () => {
       { field: "language",
 
       headerName: "Language"
-      },
-
-      { field: "kar_id",
-
-        flex: 0.6,
-
-      headerName: "Kar Id"
       },
 
       { field: "region",

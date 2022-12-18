@@ -2,16 +2,6 @@
 const puja_modelsFields = {
 	id: { type: 'id', label: 'ID' },
 
-    kar_id: { type: 'int', label: 'Kar Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
     duration: { type: 'int', label: 'Duration',
 
     options: [
@@ -73,16 +63,6 @@ const puja_modelsFields = {
     },
 
     puja_id: { type: 'relation_one', label: 'Puja Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    test: { type: 'relation_many', label: 'Test',
 
     options: [
 

@@ -2,16 +2,6 @@
 const puja_model_samagri_mappingsFields = {
 	id: { type: 'id', label: 'ID' },
 
-    kar_id: { type: 'int', label: 'Kar Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
     no_of_standard_qty: { type: 'int', label: 'No Of Standard Qty',
 
     options: [

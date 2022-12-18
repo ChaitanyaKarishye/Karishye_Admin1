@@ -14,11 +14,6 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-kar_id: {
-        type: DataTypes.INTEGER,
-
-      },
-
 no_of_standard_qty: {
         type: DataTypes.INTEGER,
 

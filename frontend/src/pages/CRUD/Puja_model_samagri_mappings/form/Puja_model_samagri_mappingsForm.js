@@ -78,13 +78,6 @@ const Puja_model_samagri_mappingsForm = (props) => {
 
       <Grid item>
         <InputFormItem
-          name={'kar_id'}
-          schema={puja_model_samagri_mappingsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
           name={'no_of_standard_qty'}
           schema={puja_model_samagri_mappingsFields}
         />

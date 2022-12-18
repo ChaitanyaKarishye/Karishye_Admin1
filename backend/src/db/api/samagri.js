@@ -37,11 +37,6 @@ module.exports = class SamagriDBApi {
     null
 ,
 
-    kar_id: data.kar_id
-    ||
-    null
-,
-
     cost_price: data.cost_price
     ||
     null
@@ -99,11 +94,6 @@ module.exports = class SamagriDBApi {
 ,
 
         qty_units: data.qty_units
-        ||
-        null
-,
-
-        kar_id: data.kar_id
         ||
         null
 ,
@@ -235,30 +225,6 @@ module.exports = class SamagriDBApi {
             ...where,
             standard_qty: {
               ...where.standard_qty,
-              [Op.lte]: end,
-            },
-          };
-        }
-      }
-
-      if (filter.kar_idRange) {
-        const [start, end] = filter.kar_idRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
-              [Op.gte]: start,
-            },
-          };
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
               [Op.lte]: end,
             },
           };

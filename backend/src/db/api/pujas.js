@@ -32,11 +32,6 @@ module.exports = class PujasDBApi {
     null
 ,
 
-    kar_id: data.kar_id
-    ||
-    null
-,
-
     region: data.region
     ||
     null
@@ -99,11 +94,6 @@ module.exports = class PujasDBApi {
 ,
 
         language: data.language
-        ||
-        null
-,
-
-        kar_id: data.kar_id
         ||
         null
 ,
@@ -258,30 +248,6 @@ module.exports = class PujasDBApi {
             filter.images,
           ),
         };
-      }
-
-      if (filter.kar_idRange) {
-        const [start, end] = filter.kar_idRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
-              [Op.gte]: start,
-            },
-          };
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
-              [Op.lte]: end,
-            },
-          };
-        }
       }
 
       if (

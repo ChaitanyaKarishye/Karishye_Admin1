@@ -15,9 +15,6 @@ const router = express.Router();
  *        type: object
  *        properties:
 
- *          kar_id:
- *            type: integer
- *            format: int64
  *          no_of_standard_qty:
  *            type: integer
  *            format: int64

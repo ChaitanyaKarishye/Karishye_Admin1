@@ -28,10 +28,6 @@ const router = express.Router();
  *            type: string
  *            default: images
 
- *          kar_id:
- *            type: integer
- *            format: int64
-
  *          
  *          
  *          

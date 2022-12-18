@@ -3,8 +3,6 @@ import * as dataFormat from 'pages/CRUD/Puja_models/table/Puja_modelsDataFormatt
 
 // eslint-disable-next-line
 import * as pujasDataFormat from 'pages/CRUD/Pujas/table/PujasDataFormatters';
-// eslint-disable-next-line
-import * as pujarisDataFormat from 'pages/CRUD/Pujaris/table/PujarisDataFormatters';
 
 import actions from 'actions/puja_models/puja_modelsListActions';
 import React from 'react';
@@ -61,7 +59,7 @@ const Puja_modelsTable = () => {
 
   const [filters, setFilters] = React.useState([
     {label: 'Name', title: 'name'},
-          {label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'Duration', title: 'duration', number: 'true'},{label: 'Pujari Cost', title: 'pujari_cost', number: 'true'},{label: 'No Of Pujaris', title: 'no_of_pujaris', number: 'true'},{label: 'Model Selling Price', title: 'model_selling_price', number: 'true'},{label: 'Advance Amount', title: 'advance_amount', number: 'true'},
+          {label: 'Duration', title: 'duration', number: 'true'},{label: 'Pujari Cost', title: 'pujari_cost', number: 'true'},{label: 'No Of Pujaris', title: 'no_of_pujaris', number: 'true'},{label: 'Model Selling Price', title: 'model_selling_price', number: 'true'},{label: 'Advance Amount', title: 'advance_amount', number: 'true'},
 
           {label: 'Puja Id', title: 'puja_id'},
   ]);
@@ -190,13 +188,6 @@ const Puja_modelsTable = () => {
 
   const columns = [
 
-      { field: "kar_id",
-
-        flex: 0.6,
-
-      headerName: "Kar Id"
-      },
-
       { field: "duration",
 
         flex: 0.6,
@@ -246,15 +237,6 @@ const Puja_modelsTable = () => {
         flex: 1,
 
       headerName: "Puja Id"
-      },
-
-      { field: "test",
-
-        sortable: false,
-        renderCell: (params) => pujarisDataFormat.listFormatter(params.row[params.field], history, 'pujaris'),
-        flex: 1,
-
-      headerName: "Test"
       },
 
       { field: "name",

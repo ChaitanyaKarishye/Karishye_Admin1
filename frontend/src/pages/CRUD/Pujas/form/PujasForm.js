@@ -101,13 +101,6 @@ const PujasForm = (props) => {
 
       <Grid item>
         <InputFormItem
-          name={'kar_id'}
-          schema={pujasFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
           name={'region'}
           schema={pujasFields}
 

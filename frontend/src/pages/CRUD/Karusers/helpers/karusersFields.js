@@ -96,16 +96,6 @@ const karusersFields = {
 
     },
 
-    kar_id: { type: 'int', label: 'Kar Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
     is_karishye_sourced: { type: 'boolean', label: 'Is Karishye Sourced',
 
     options: [

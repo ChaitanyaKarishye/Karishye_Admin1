@@ -108,13 +108,6 @@ const SamagriForm = (props) => {
 
       <Grid item>
         <InputFormItem
-          name={'kar_id'}
-          schema={samagriFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
           name={'cost_price'}
           schema={samagriFields}
         />

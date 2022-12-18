@@ -34,16 +34,6 @@ const pujasFields = {
 
     },
 
-    kar_id: { type: 'int', label: 'Kar Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
     region: { type: 'string', label: 'Region',
 
     options: [

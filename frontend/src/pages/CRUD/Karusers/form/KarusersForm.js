@@ -148,13 +148,6 @@ const KarusersForm = (props) => {
       </Grid>
 
       <Grid item>
-        <InputFormItem
-          name={'kar_id'}
-          schema={karusersFields}
-        />
-      </Grid>
-
-      <Grid item>
         <SwitchFormItem
           name={'is_karishye_sourced'}
           schema={karusersFields}

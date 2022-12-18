@@ -17,11 +17,6 @@ module.exports = class Puja_modelsDBApi {
   {
   id: data.id || undefined,
 
-    kar_id: data.kar_id
-    ||
-    null
-,
-
     duration: data.duration
     ||
     null
@@ -69,10 +64,6 @@ module.exports = class Puja_modelsDBApi {
     transaction,
     });
 
-    await puja_models.setTest(data.test || [], {
-    transaction,
-    });
-
   return puja_models;
   }
 
@@ -86,11 +77,6 @@ module.exports = class Puja_modelsDBApi {
 
     await puja_models.update(
       {
-
-        kar_id: data.kar_id
-        ||
-        null
-,
 
         duration: data.duration
         ||
@@ -137,10 +123,6 @@ module.exports = class Puja_modelsDBApi {
       transaction,
     });
 
-    await puja_models.setTest(data.test || [], {
-      transaction,
-    });
-
     return puja_models;
   }
 
@@ -181,10 +163,6 @@ module.exports = class Puja_modelsDBApi {
       transaction
     });
 
-    output.test = await puja_models.getTest({
-      transaction
-    });
-
     return output;
   }
 
@@ -206,17 +184,6 @@ module.exports = class Puja_modelsDBApi {
         as: 'puja_id',
       },
 
-      {
-        model: db.pujaris,
-        as: 'test',
-        through: filter.test ? { where: {
-          [Op.or]: filter.test.split('|').map(item => {
-            return { ['Id']: Utils.uuid(item) }
-          })
-        }} : null,
-        required: filter.test ? true : null,
-      },
-
     ];
 
     if (filter) {
@@ -236,30 +203,6 @@ module.exports = class Puja_modelsDBApi {
             filter.name,
           ),
         };
-      }
-
-      if (filter.kar_idRange) {
-        const [start, end] = filter.kar_idRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
-              [Op.gte]: start,
-            },
-          };
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
-              [Op.lte]: end,
-            },
-          };
-        }
       }
 
       if (filter.durationRange) {

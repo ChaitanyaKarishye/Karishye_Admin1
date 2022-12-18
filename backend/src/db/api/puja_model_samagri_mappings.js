@@ -17,11 +17,6 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
   {
   id: data.id || undefined,
 
-    kar_id: data.kar_id
-    ||
-    null
-,
-
     no_of_standard_qty: data.no_of_standard_qty
     ||
     null
@@ -55,11 +50,6 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
 
     await puja_model_samagri_mappings.update(
       {
-
-        kar_id: data.kar_id
-        ||
-        null
-,
 
         no_of_standard_qty: data.no_of_standard_qty
         ||
@@ -157,30 +147,6 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
           ...where,
           ['id']: Utils.uuid(filter.id),
         };
-      }
-
-      if (filter.kar_idRange) {
-        const [start, end] = filter.kar_idRange;
-
-        if (start !== undefined && start !== null && start !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
-              [Op.gte]: start,
-            },
-          };
-        }
-
-        if (end !== undefined && end !== null && end !== '') {
-          where = {
-            ...where,
-            kar_id: {
-              ...where.kar_id,
-              [Op.lte]: end,
-            },
-          };
-        }
       }
 
       if (filter.no_of_standard_qtyRange) {

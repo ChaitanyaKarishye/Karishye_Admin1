@@ -52,16 +52,6 @@ const samagriFields = {
 
     },
 
-    kar_id: { type: 'int', label: 'Kar Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
     cost_price: { type: 'int', label: 'Cost Price',
 
     options: [

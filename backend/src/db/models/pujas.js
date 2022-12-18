@@ -37,11 +37,6 @@ language: {
 
       },
 
-kar_id: {
-        type: DataTypes.INTEGER,
-
-      },
-
 region: {
         type: DataTypes.TEXT,
 

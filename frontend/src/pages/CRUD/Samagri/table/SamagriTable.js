@@ -56,7 +56,7 @@ const SamagriTable = () => {
 
   const [filters, setFilters] = React.useState([
     {label: 'Name', title: 'name'},{label: 'Description', title: 'description'},
-          {label: 'Standard Qty', title: 'standard_qty', number: 'true'},{label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'Cost Price', title: 'cost_price', number: 'true'},{label: 'Pujari Selling Price', title: 'pujari_selling_price', number: 'true'},{label: 'Customer Mrp', title: 'customer_mrp', number: 'true'},
+          {label: 'Standard Qty', title: 'standard_qty', number: 'true'},{label: 'Cost Price', title: 'cost_price', number: 'true'},{label: 'Pujari Selling Price', title: 'pujari_selling_price', number: 'true'},{label: 'Customer Mrp', title: 'customer_mrp', number: 'true'},
 
   ]);
 
@@ -208,13 +208,6 @@ const SamagriTable = () => {
       { field: "qty_units",
 
       headerName: "Qty Units"
-      },
-
-      { field: "kar_id",
-
-        flex: 0.6,
-
-      headerName: "Kar Id"
       },
 
       { field: "cost_price",

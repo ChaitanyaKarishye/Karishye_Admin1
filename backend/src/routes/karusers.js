@@ -34,10 +34,6 @@ const router = express.Router();
  *            type: string
  *            default: email_id
 
- *          kar_id:
- *            type: integer
- *            format: int64
-
  *          
  */
 

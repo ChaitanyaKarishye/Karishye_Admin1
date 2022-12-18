@@ -61,7 +61,7 @@ const Puja_model_samagri_mappingsTable = () => {
 
   const [filters, setFilters] = React.useState([
 
-          {label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'No Of Standard Qty', title: 'no_of_standard_qty', number: 'true'},
+          {label: 'No Of Standard Qty', title: 'no_of_standard_qty', number: 'true'},
 
           {label: 'Model Id', title: 'model_id'},{label: 'Samagri Id', title: 'samagri_id'},
   ]);
@@ -189,13 +189,6 @@ const Puja_model_samagri_mappingsTable = () => {
   }
 
   const columns = [
-
-      { field: "kar_id",
-
-        flex: 0.6,
-
-      headerName: "Kar Id"
-      },
 
       { field: "no_of_standard_qty",
 
