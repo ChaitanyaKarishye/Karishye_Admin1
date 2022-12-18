@@ -82,6 +82,16 @@ const puja_modelsFields = {
 
     },
 
+    indicative_cost_price: { type: 'int', label: 'Indicative Cost Price',
+
+    options: [
+
+    { value: 'value', label: 'value' },
+
+]
+
+    },
+
 }
 
 export default puja_modelsFields;

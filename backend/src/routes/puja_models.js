@@ -34,6 +34,9 @@ const router = express.Router();
  *          advance_amount:
  *            type: integer
  *            format: int64
+ *          indicative_cost_price:
+ *            type: integer
+ *            format: int64
 
  */
 

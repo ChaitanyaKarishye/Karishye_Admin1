@@ -59,7 +59,7 @@ const Puja_modelsTable = () => {
 
   const [filters, setFilters] = React.useState([
     {label: 'Name', title: 'name'},
-          {label: 'Duration', title: 'duration', number: 'true'},{label: 'Pujari Cost', title: 'pujari_cost', number: 'true'},{label: 'No Of Pujaris', title: 'no_of_pujaris', number: 'true'},{label: 'Model Selling Price', title: 'model_selling_price', number: 'true'},{label: 'Advance Amount', title: 'advance_amount', number: 'true'},
+          {label: 'Duration', title: 'duration', number: 'true'},{label: 'Pujari Cost', title: 'pujari_cost', number: 'true'},{label: 'No Of Pujaris', title: 'no_of_pujaris', number: 'true'},{label: 'Model Selling Price', title: 'model_selling_price', number: 'true'},{label: 'Advance Amount', title: 'advance_amount', number: 'true'},{label: 'Indicative Cost Price', title: 'indicative_cost_price', number: 'true'},
 
           {label: 'Puja Id', title: 'puja_id'},
   ]);
@@ -244,6 +244,13 @@ const Puja_modelsTable = () => {
         flex: 0.6,
 
       headerName: "Name"
+      },
+
+      { field: "indicative_cost_price",
+
+        flex: 0.6,
+
+      headerName: "Indicative Cost Price"
       },
 
       {

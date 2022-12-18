@@ -52,6 +52,11 @@ name: {
 
       },
 
+indicative_cost_price: {
+        type: DataTypes.INTEGER,
+
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,

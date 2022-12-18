@@ -53,6 +53,11 @@ module.exports = class Puja_modelsDBApi {
     null
 ,
 
+    indicative_cost_price: data.indicative_cost_price
+    ||
+    null
+,
+
   importHash: data.importHash || null,
   createdById: currentUser.id,
   updatedById: currentUser.id,
@@ -110,6 +115,11 @@ module.exports = class Puja_modelsDBApi {
 ,
 
         name: data.name
+        ||
+        null
+,
+
+        indicative_cost_price: data.indicative_cost_price
         ||
         null
 ,
@@ -319,6 +329,30 @@ module.exports = class Puja_modelsDBApi {
             ...where,
             advance_amount: {
               ...where.advance_amount,
+              [Op.lte]: end,
+            },
+          };
+        }
+      }
+
+      if (filter.indicative_cost_priceRange) {
+        const [start, end] = filter.indicative_cost_priceRange;
+
+        if (start !== undefined && start !== null && start !== '') {
+          where = {
+            ...where,
+            indicative_cost_price: {
+              ...where.indicative_cost_price,
+              [Op.gte]: start,
+            },
+          };
+        }
+
+        if (end !== undefined && end !== null && end !== '') {
+          where = {
+            ...where,
+            indicative_cost_price: {
+              ...where.indicative_cost_price,
               [Op.lte]: end,
             },
           };
