@@ -144,6 +144,14 @@ const Puja_modelsForm = (props) => {
         />
       </Grid>
 
+      <Grid item>
+        <InputFormItem
+          name={'name'}
+          schema={puja_modelsFields}
+
+        />
+      </Grid>
+
   </Grid>
   <Grid container spacing={3} mt={2}>
     <Grid item>

@@ -53,6 +53,11 @@ module.exports = class Puja_modelsDBApi {
 
 ,
 
+    name: data.name
+    ||
+    null
+,
+
   importHash: data.importHash || null,
   createdById: currentUser.id,
   updatedById: currentUser.id,
@@ -116,6 +121,11 @@ module.exports = class Puja_modelsDBApi {
         ||
         false
 
+,
+
+        name: data.name
+        ||
+        null
 ,
 
         updatedById: currentUser.id,
@@ -214,6 +224,17 @@ module.exports = class Puja_modelsDBApi {
         where = {
           ...where,
           ['id']: Utils.uuid(filter.id),
+        };
+      }
+
+      if (filter.name) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike(
+            'puja_models',
+            'name',
+            filter.name,
+          ),
         };
       }
 

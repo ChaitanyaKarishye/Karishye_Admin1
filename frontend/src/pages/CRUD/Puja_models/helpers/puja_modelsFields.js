@@ -92,6 +92,16 @@ const puja_modelsFields = {
 
     },
 
+    name: { type: 'string', label: 'Name',
+
+    options: [
+
+    { value: 'value', label: 'value' },
+
+]
+
+    },
+
 }
 
 export default puja_modelsFields;

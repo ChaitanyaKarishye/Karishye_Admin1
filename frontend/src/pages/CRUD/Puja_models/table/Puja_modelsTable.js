@@ -60,7 +60,7 @@ const Puja_modelsTable = () => {
   const [width, setWidth] = React.useState(window.innerWidth);
 
   const [filters, setFilters] = React.useState([
-
+    {label: 'Name', title: 'name'},
           {label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'Duration', title: 'duration', number: 'true'},{label: 'Pujari Cost', title: 'pujari_cost', number: 'true'},{label: 'No Of Pujaris', title: 'no_of_pujaris', number: 'true'},{label: 'Model Selling Price', title: 'model_selling_price', number: 'true'},{label: 'Advance Amount', title: 'advance_amount', number: 'true'},
 
           {label: 'Puja Id', title: 'puja_id'},
@@ -255,6 +255,13 @@ const Puja_modelsTable = () => {
         flex: 1,
 
       headerName: "Test"
+      },
+
+      { field: "name",
+
+        flex: 0.6,
+
+      headerName: "Name"
       },
 
       {

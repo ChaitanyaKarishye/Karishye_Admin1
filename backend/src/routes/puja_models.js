@@ -15,6 +15,10 @@ const router = express.Router();
  *        type: object
  *        properties:
 
+ *          name:
+ *            type: string
+ *            default: name
+
  *          kar_id:
  *            type: integer
  *            format: int64

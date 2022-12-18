@@ -52,6 +52,11 @@ is_popular_model: {
 
       },
 
+name: {
+        type: DataTypes.TEXT,
+
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,
