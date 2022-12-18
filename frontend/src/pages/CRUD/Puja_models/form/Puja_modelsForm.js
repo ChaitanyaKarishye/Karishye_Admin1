@@ -82,16 +82,6 @@ const Puja_modelsForm = (props) => {
       </Grid>
 
       <Grid item>
-        <PujasSelectItem
-        name={'puja_id'}
-        schema={puja_modelsFields}
-        showCreate={!modal}
-        multiple
-        form={form}
-        />
-      </Grid>
-
-      <Grid item>
         <InputFormItem
           name={'duration'}
           schema={puja_modelsFields}
@@ -130,6 +120,15 @@ const Puja_modelsForm = (props) => {
         <SwitchFormItem
           name={'is_popular_model'}
           schema={puja_modelsFields}
+        />
+      </Grid>
+
+      <Grid item>
+        <PujasSelectItem
+        name={'puja_id'}
+        schema={puja_modelsFields}
+        showCreate={!modal}
+        form={form}
         />
       </Grid>
 

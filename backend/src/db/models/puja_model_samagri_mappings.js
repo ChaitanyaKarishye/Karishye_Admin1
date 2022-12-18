@@ -39,22 +39,20 @@ no_of_standard_qty: {
 
   puja_model_samagri_mappings.associate = (db) => {
 
-    db.puja_model_samagri_mappings.belongsToMany(db.puja_models, {
+    db.puja_model_samagri_mappings.belongsTo(db.puja_models, {
       as: 'model_id',
       foreignKey: {
-        name: 'puja_model_samagri_mappings_model_idId',
+        name: 'model_idId',
       },
       constraints: false,
-      through: 'puja_model_samagri_mappingsModel_idPuja_models',
     });
 
-    db.puja_model_samagri_mappings.belongsToMany(db.samagri, {
+    db.puja_model_samagri_mappings.belongsTo(db.samagri, {
       as: 'samagri_id',
       foreignKey: {
-        name: 'puja_model_samagri_mappings_samagri_idId',
+        name: 'samagri_idId',
       },
       constraints: false,
-      through: 'puja_model_samagri_mappingsSamagri_idSamagri',
     });
 
     db.puja_model_samagri_mappings.belongsTo(db.users, {

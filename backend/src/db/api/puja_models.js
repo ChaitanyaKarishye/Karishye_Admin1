@@ -60,7 +60,7 @@ module.exports = class Puja_modelsDBApi {
   { transaction },
   );
 
-    await puja_models.setPuja_id(data.puja_id || [], {
+    await puja_models.setPuja_id(data.puja_id || null, {
     transaction,
     });
 
@@ -119,7 +119,7 @@ module.exports = class Puja_modelsDBApi {
       {transaction},
     );
 
-    await puja_models.setPuja_id(data.puja_id || [], {
+    await puja_models.setPuja_id(data.puja_id || null, {
       transaction,
     });
 
@@ -182,12 +182,6 @@ module.exports = class Puja_modelsDBApi {
       {
         model: db.pujas,
         as: 'puja_id',
-        through: filter.puja_id ? { where: {
-          [Op.or]: filter.puja_id.split('|').map(item => {
-            return { ['Id']: Utils.uuid(item) }
-          })
-        }} : null,
-        required: filter.puja_id ? true : null,
       },
 
     ];
@@ -362,6 +356,17 @@ module.exports = class Puja_modelsDBApi {
         where = {
           ...where,
           is_popular_model: filter.is_popular_model,
+        };
+      }
+
+      if (filter.puja_id) {
+        var listItems = filter.puja_id.split('|').map(item => {
+          return  Utils.uuid(item)
+        });
+
+        where = {
+          ...where,
+          puja_idId: {[Op.or]: listItems}
         };
       }
 

@@ -12,16 +12,6 @@ const puja_modelsFields = {
 
     },
 
-    puja_id: { type: 'relation_many', label: 'Puja Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
     duration: { type: 'int', label: 'Duration',
 
     options: [
@@ -73,6 +63,16 @@ const puja_modelsFields = {
     },
 
     is_popular_model: { type: 'boolean', label: 'Is Popular Model',
+
+    options: [
+
+    { value: 'value', label: 'value' },
+
+]
+
+    },
+
+    puja_id: { type: 'relation_one', label: 'Puja Id',
 
     options: [
 

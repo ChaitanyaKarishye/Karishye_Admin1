@@ -61,6 +61,7 @@ const Puja_modelsTable = () => {
 
           {label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'Duration', title: 'duration', number: 'true'},{label: 'Pujari Cost', title: 'pujari_cost', number: 'true'},{label: 'No Of Pujaris', title: 'no_of_pujaris', number: 'true'},{label: 'Model Selling Price', title: 'model_selling_price', number: 'true'},{label: 'Advance Amount', title: 'advance_amount', number: 'true'},
 
+          {label: 'Puja Id', title: 'puja_id'},
   ]);
 
   const [filterItems, setFilterItems] = React.useState([]);
@@ -194,15 +195,6 @@ const Puja_modelsTable = () => {
       headerName: "Kar Id"
       },
 
-      { field: "puja_id",
-
-        sortable: false,
-        renderCell: (params) => pujasDataFormat.listFormatter(params.row[params.field], history, 'pujas'),
-        flex: 1,
-
-      headerName: "Puja Id"
-      },
-
       { field: "duration",
 
         flex: 0.6,
@@ -243,6 +235,15 @@ const Puja_modelsTable = () => {
         renderCell: (params) => dataFormat.booleanFormatter(params.row),
 
       headerName: "Is Popular Model"
+      },
+
+      { field: "puja_id",
+
+        sortable: false,
+        renderCell: (params) => pujasDataFormat.listFormatter(params.row[params.field], history, 'pujas'),
+        flex: 1,
+
+      headerName: "Puja Id"
       },
 
       {

@@ -84,11 +84,17 @@ const Puja_model_samagri_mappingsForm = (props) => {
       </Grid>
 
       <Grid item>
+        <InputFormItem
+          name={'no_of_standard_qty'}
+          schema={puja_model_samagri_mappingsFields}
+        />
+      </Grid>
+
+      <Grid item>
         <Puja_modelsSelectItem
         name={'model_id'}
         schema={puja_model_samagri_mappingsFields}
         showCreate={!modal}
-        multiple
         form={form}
         />
       </Grid>
@@ -98,15 +104,7 @@ const Puja_model_samagri_mappingsForm = (props) => {
         name={'samagri_id'}
         schema={puja_model_samagri_mappingsFields}
         showCreate={!modal}
-        multiple
         form={form}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'no_of_standard_qty'}
-          schema={puja_model_samagri_mappingsFields}
         />
       </Grid>
 

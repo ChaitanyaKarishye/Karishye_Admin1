@@ -34,11 +34,11 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
   { transaction },
   );
 
-    await puja_model_samagri_mappings.setModel_id(data.model_id || [], {
+    await puja_model_samagri_mappings.setModel_id(data.model_id || null, {
     transaction,
     });
 
-    await puja_model_samagri_mappings.setSamagri_id(data.samagri_id || [], {
+    await puja_model_samagri_mappings.setSamagri_id(data.samagri_id || null, {
     transaction,
     });
 
@@ -71,11 +71,11 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
       {transaction},
     );
 
-    await puja_model_samagri_mappings.setModel_id(data.model_id || [], {
+    await puja_model_samagri_mappings.setModel_id(data.model_id || null, {
       transaction,
     });
 
-    await puja_model_samagri_mappings.setSamagri_id(data.samagri_id || [], {
+    await puja_model_samagri_mappings.setSamagri_id(data.samagri_id || null, {
       transaction,
     });
 
@@ -142,23 +142,11 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
       {
         model: db.puja_models,
         as: 'model_id',
-        through: filter.model_id ? { where: {
-          [Op.or]: filter.model_id.split('|').map(item => {
-            return { ['Id']: Utils.uuid(item) }
-          })
-        }} : null,
-        required: filter.model_id ? true : null,
       },
 
       {
         model: db.samagri,
         as: 'samagri_id',
-        through: filter.samagri_id ? { where: {
-          [Op.or]: filter.samagri_id.split('|').map(item => {
-            return { ['Id']: Utils.uuid(item) }
-          })
-        }} : null,
-        required: filter.samagri_id ? true : null,
       },
 
     ];
@@ -230,6 +218,28 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
           active:
             filter.active === true ||
             filter.active === 'true',
+        };
+      }
+
+      if (filter.model_id) {
+        var listItems = filter.model_id.split('|').map(item => {
+          return  Utils.uuid(item)
+        });
+
+        where = {
+          ...where,
+          model_idId: {[Op.or]: listItems}
+        };
+      }
+
+      if (filter.samagri_id) {
+        var listItems = filter.samagri_id.split('|').map(item => {
+          return  Utils.uuid(item)
+        });
+
+        where = {
+          ...where,
+          samagri_idId: {[Op.or]: listItems}
         };
       }
 

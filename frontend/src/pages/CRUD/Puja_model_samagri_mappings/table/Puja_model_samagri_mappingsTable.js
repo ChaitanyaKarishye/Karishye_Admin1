@@ -63,6 +63,7 @@ const Puja_model_samagri_mappingsTable = () => {
 
           {label: 'Kar Id', title: 'kar_id', number: 'true'},{label: 'No Of Standard Qty', title: 'no_of_standard_qty', number: 'true'},
 
+          {label: 'Model Id', title: 'model_id'},{label: 'Samagri Id', title: 'samagri_id'},
   ]);
 
   const [filterItems, setFilterItems] = React.useState([]);
@@ -196,6 +197,13 @@ const Puja_model_samagri_mappingsTable = () => {
       headerName: "Kar Id"
       },
 
+      { field: "no_of_standard_qty",
+
+        flex: 0.6,
+
+      headerName: "No Of Standard Qty"
+      },
+
       { field: "model_id",
 
         sortable: false,
@@ -212,13 +220,6 @@ const Puja_model_samagri_mappingsTable = () => {
         flex: 1,
 
       headerName: "Samagri Id"
-      },
-
-      { field: "no_of_standard_qty",
-
-        flex: 0.6,
-
-      headerName: "No Of Standard Qty"
       },
 
       {
