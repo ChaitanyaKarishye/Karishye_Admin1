@@ -67,6 +67,15 @@ is_popular_model: {
 
   puja_models.associate = (db) => {
 
+    db.puja_models.belongsToMany(db.pujaris, {
+      as: 'test',
+      foreignKey: {
+        name: 'puja_models_testId',
+      },
+      constraints: false,
+      through: 'puja_modelsTestPujaris',
+    });
+
     db.puja_models.belongsTo(db.pujas, {
       as: 'puja_id',
       foreignKey: {

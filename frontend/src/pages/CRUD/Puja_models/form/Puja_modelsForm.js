@@ -27,6 +27,8 @@ import Widget from 'components/Widget';
 
 import PujasSelectItem from 'pages/CRUD/Pujas/helpers/PujasSelectItem';
 
+import PujarisSelectItem from 'pages/CRUD/Pujaris/helpers/PujarisSelectItem';
+
 const Puja_modelsForm = (props) => {
 
   const {
@@ -128,6 +130,16 @@ const Puja_modelsForm = (props) => {
         name={'puja_id'}
         schema={puja_modelsFields}
         showCreate={!modal}
+        form={form}
+        />
+      </Grid>
+
+      <Grid item>
+        <PujarisSelectItem
+        name={'test'}
+        schema={puja_modelsFields}
+        showCreate={!modal}
+        multiple
         form={form}
         />
       </Grid>

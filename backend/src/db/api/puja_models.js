@@ -64,6 +64,10 @@ module.exports = class Puja_modelsDBApi {
     transaction,
     });
 
+    await puja_models.setTest(data.test || [], {
+    transaction,
+    });
+
   return puja_models;
   }
 
@@ -123,6 +127,10 @@ module.exports = class Puja_modelsDBApi {
       transaction,
     });
 
+    await puja_models.setTest(data.test || [], {
+      transaction,
+    });
+
     return puja_models;
   }
 
@@ -163,6 +171,10 @@ module.exports = class Puja_modelsDBApi {
       transaction
     });
 
+    output.test = await puja_models.getTest({
+      transaction
+    });
+
     return output;
   }
 
@@ -182,6 +194,17 @@ module.exports = class Puja_modelsDBApi {
       {
         model: db.pujas,
         as: 'puja_id',
+      },
+
+      {
+        model: db.pujaris,
+        as: 'test',
+        through: filter.test ? { where: {
+          [Op.or]: filter.test.split('|').map(item => {
+            return { ['Id']: Utils.uuid(item) }
+          })
+        }} : null,
+        required: filter.test ? true : null,
       },
 
     ];

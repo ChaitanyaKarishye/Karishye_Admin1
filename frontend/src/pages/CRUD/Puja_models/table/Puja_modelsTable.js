@@ -3,6 +3,8 @@ import * as dataFormat from 'pages/CRUD/Puja_models/table/Puja_modelsDataFormatt
 
 // eslint-disable-next-line
 import * as pujasDataFormat from 'pages/CRUD/Pujas/table/PujasDataFormatters';
+// eslint-disable-next-line
+import * as pujarisDataFormat from 'pages/CRUD/Pujaris/table/PujarisDataFormatters';
 
 import actions from 'actions/puja_models/puja_modelsListActions';
 import React from 'react';
@@ -244,6 +246,15 @@ const Puja_modelsTable = () => {
         flex: 1,
 
       headerName: "Puja Id"
+      },
+
+      { field: "test",
+
+        sortable: false,
+        renderCell: (params) => pujarisDataFormat.listFormatter(params.row[params.field], history, 'pujaris'),
+        flex: 1,
+
+      headerName: "Test"
       },
 
       {

@@ -82,6 +82,16 @@ const puja_modelsFields = {
 
     },
 
+    test: { type: 'relation_many', label: 'Test',
+
+    options: [
+
+    { value: 'value', label: 'value' },
+
+]
+
+    },
+
 }
 
 export default puja_modelsFields;
