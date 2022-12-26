@@ -6,25 +6,26 @@ async function list(filter) {
   const response = await axios.get(
     `/puja_model_samagri_mappings?page=${filter.page}&limit=${filter.limit}
 
-    &puja_model_samagri_mappings=${filter.puja_model_samagri_mappings ? filter.puja_model_samagri_mappings : ''}
+    &puja_model_samagri_mappings=${
+      filter.puja_model_samagri_mappings
+        ? filter.puja_model_samagri_mappings
+        : ''
+    }
     &${queryString.stringify(filter.orderBy)}${filter.request}`,
   );
   return response.data;
 }
 
 async function filterPuja_model_samagri_mappings(request, filter) {
-  const response = await axios.get(`/puja_model_samagri_mappings?page=${filter.page}&limit=${filter.limit}${request}`);
+  const response = await axios.get(
+    `/puja_model_samagri_mappings?page=${filter.page}&limit=${filter.limit}${request}`,
+  );
   return response.data;
 }
 
 const actions = {
-
-  doFilter: (request, filter) => async (
-    dispatch,
-    getState,
-  ) => {
+  doFilter: (request, filter) => async (dispatch, getState) => {
     try {
-
       const response = await filterPuja_model_samagri_mappings(request, filter);
 
       dispatch({
@@ -38,37 +39,36 @@ const actions = {
       Errors.handle(error);
       dispatch({
         type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_FETCH_ERROR',
-      })
-    }
-  },
-
-  doFetch: (filter, keepPagination = false) => async (
-    dispatch,
-    getState,
-  ) => {
-    try {
-      dispatch({
-        type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_FETCH_STARTED',
-        payload: { filter, keepPagination },
-      });
-
-      const response = await list(filter);
-
-      dispatch({
-        type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_FETCH_SUCCESS',
-        payload: {
-          rows: response.rows,
-          count: response.count,
-        },
-      });
-    } catch (error) {
-      Errors.handle(error);
-
-      dispatch({
-        type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_FETCH_ERROR',
       });
     }
   },
+
+  doFetch:
+    (filter, keepPagination = false) =>
+    async (dispatch, getState) => {
+      try {
+        dispatch({
+          type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_FETCH_STARTED',
+          payload: { filter, keepPagination },
+        });
+
+        const response = await list(filter);
+
+        dispatch({
+          type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_FETCH_SUCCESS',
+          payload: {
+            rows: response.rows,
+            count: response.count,
+          },
+        });
+      } catch (error) {
+        Errors.handle(error);
+
+        dispatch({
+          type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_FETCH_ERROR',
+        });
+      }
+    },
 
   doDelete: (filter, id) => async (dispatch) => {
     try {
@@ -76,7 +76,7 @@ const actions = {
         type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_DELETE_STARTED',
       });
 
-      await axios.delete(`/puja_model_samagri_mappings/${id}`)
+      await axios.delete(`/puja_model_samagri_mappings/${id}`);
 
       dispatch({
         type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_DELETE_SUCCESS',
@@ -90,7 +90,6 @@ const actions = {
           count: response.count,
         },
       });
-
     } catch (error) {
       Errors.handle(error);
 
@@ -100,19 +99,18 @@ const actions = {
     }
   },
   doOpenConfirm: (id) => async (dispatch) => {
-      dispatch({
-        type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_OPEN_CONFIRM',
-        payload: {
-          id: id
-        },
-      });
+    dispatch({
+      type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_OPEN_CONFIRM',
+      payload: {
+        id: id,
+      },
+    });
   },
   doCloseConfirm: () => async (dispatch) => {
-      dispatch({
-        type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_CLOSE_CONFIRM',
-      });
+    dispatch({
+      type: 'PUJA_MODEL_SAMAGRI_MAPPINGS_LIST_CLOSE_CONFIRM',
+    });
   },
 };
-
 
 export default actions;

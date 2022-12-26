@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const puja_model_samagri_mappings = sequelize.define(
     'puja_model_samagri_mappings',
     {
@@ -14,9 +14,8 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-no_of_standard_qty: {
+      no_of_standard_qty: {
         type: DataTypes.INTEGER,
-
       },
 
       importHash: {
@@ -33,7 +32,6 @@ no_of_standard_qty: {
   );
 
   puja_model_samagri_mappings.associate = (db) => {
-
     db.puja_model_samagri_mappings.belongsTo(db.puja_models, {
       as: 'model_id',
       foreignKey: {
@@ -61,4 +59,3 @@ no_of_standard_qty: {
 
   return puja_model_samagri_mappings;
 };
-

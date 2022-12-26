@@ -1,4 +1,3 @@
-
 import auth from 'reducers/auth';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
@@ -51,6 +50,4 @@ export default (history) =>
     puja_models,
 
     puja_model_samagri_mappings,
-
   });
-

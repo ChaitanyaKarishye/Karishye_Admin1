@@ -5,15 +5,8 @@ import actions from 'actions/karusers/karusersFormActions';
 import { connect } from 'react-redux';
 
 const KarusersFormPage = (props) => {
-
-  const {
-    dispatch,
-    match,
-    saveLoading,
-    findLoading,
-    record,
-    currentUser
-  } = props;
+  const { dispatch, match, saveLoading, findLoading, record, currentUser } =
+    props;
 
   const [dispatched, setDispatched] = useState(false);
 
@@ -27,9 +20,9 @@ const KarusersFormPage = (props) => {
 
   const doSubmit = (id, data) => {
     if (isEditing() || isProfile()) {
-      dispatch(actions.doUpdate(id, data, isProfile()))
+      dispatch(actions.doUpdate(id, data, isProfile()));
     } else {
-      dispatch(actions.doCreate(data))
+      dispatch(actions.doCreate(data));
     }
   };
 
@@ -42,29 +35,29 @@ const KarusersFormPage = (props) => {
         const currentUserId = currentUser.user.id;
         dispatch(actions.doFind(currentUserId));
       } else {
-        dispatch(actions.doNew())
+        dispatch(actions.doNew());
       }
     }
     setDispatched(true);
-  }, [match, dispatch])
+  }, [match, dispatch]);
 
   return (
     <React.Fragment>
       {dispatched && (
         <KarusersForm
-        saveLoading={saveLoading}
-        findLoading={findLoading}
-        currentUser={currentUser}
-        record={(isEditing() || isProfile()) ? record : {}}
-        isEditing={isEditing()}
-        isProfile={isProfile()}
-        onSubmit={doSubmit}
-        onCancel={() => dispatch(push('/admin/karusers'))}
+          saveLoading={saveLoading}
+          findLoading={findLoading}
+          currentUser={currentUser}
+          record={isEditing() || isProfile() ? record : {}}
+          isEditing={isEditing()}
+          isProfile={isProfile()}
+          onSubmit={doSubmit}
+          onCancel={() => dispatch(push('/admin/karusers'))}
         />
-        )}
+      )}
     </React.Fragment>
   );
-}
+};
 
 function mapStateToProps(store) {
   return {

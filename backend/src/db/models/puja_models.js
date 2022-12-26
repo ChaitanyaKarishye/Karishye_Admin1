@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const puja_models = sequelize.define(
     'puja_models',
     {
@@ -14,47 +14,39 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-duration: {
+      duration: {
         type: DataTypes.INTEGER,
-
       },
 
-pujari_cost: {
+      pujari_cost: {
         type: DataTypes.INTEGER,
-
       },
 
-no_of_pujaris: {
+      no_of_pujaris: {
         type: DataTypes.INTEGER,
-
       },
 
-model_selling_price: {
+      model_selling_price: {
         type: DataTypes.INTEGER,
-
       },
 
-advance_amount: {
+      advance_amount: {
         type: DataTypes.INTEGER,
-
       },
 
-is_popular_model: {
+      is_popular_model: {
         type: DataTypes.BOOLEAN,
 
         allowNull: false,
         defaultValue: false,
-
       },
 
-name: {
+      name: {
         type: DataTypes.TEXT,
-
       },
 
-indicative_cost_price: {
+      indicative_cost_price: {
         type: DataTypes.INTEGER,
-
       },
 
       importHash: {
@@ -71,7 +63,6 @@ indicative_cost_price: {
   );
 
   puja_models.associate = (db) => {
-
     db.puja_models.belongsTo(db.pujas, {
       as: 'puja_id',
       foreignKey: {
@@ -91,4 +82,3 @@ indicative_cost_price: {
 
   return puja_models;
 };
-

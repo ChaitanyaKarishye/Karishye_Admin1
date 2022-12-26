@@ -17,14 +17,14 @@ const actions = {
         type: 'PUJA_MODELS_FORM_FIND_STARTED',
       });
 
-      axios.get(`/puja_models/${id}`).then(res => {
+      axios.get(`/puja_models/${id}`).then((res) => {
         const record = res.data;
 
         dispatch({
           type: 'PUJA_MODELS_FORM_FIND_SUCCESS',
           payload: record,
         });
-      })
+      });
     } catch (error) {
       Errors.handle(error);
 
@@ -42,13 +42,13 @@ const actions = {
         type: 'PUJA_MODELS_FORM_CREATE_STARTED',
       });
 
-      axios.post('/puja_models', { data: values }).then(res => {
+      axios.post('/puja_models', { data: values }).then((res) => {
         dispatch({
           type: 'PUJA_MODELS_FORM_CREATE_SUCCESS',
         });
         showSnackbar({ type: 'success', message: 'Puja_models created' });
         dispatch(push('/admin/puja_models'));
-      })
+      });
     } catch (error) {
       Errors.handle(error);
 
@@ -58,16 +58,13 @@ const actions = {
     }
   },
 
-  doUpdate: (id, values, isProfile) => async (
-    dispatch,
-    getState,
-  ) => {
+  doUpdate: (id, values, isProfile) => async (dispatch, getState) => {
     try {
       dispatch({
         type: 'PUJA_MODELS_FORM_UPDATE_STARTED',
       });
 
-      await axios.put(`/puja_models/${id}`, {id, data: values});
+      await axios.put(`/puja_models/${id}`, { id, data: values });
 
       dispatch(doInit());
 

@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const samagri = sequelize.define(
     'samagri',
     {
@@ -14,70 +14,40 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-name: {
+      name: {
         type: DataTypes.TEXT,
-
       },
 
-description: {
+      description: {
         type: DataTypes.TEXT,
-
       },
 
-standard_qty: {
+      standard_qty: {
         type: DataTypes.INTEGER,
-
       },
 
-qty_units: {
+      qty_units: {
         type: DataTypes.ENUM,
 
-        values: [
-
-"kg",
-
-"no(s)",
-
-"ml",
-
-"gms",
-
-"dozens",
-
-"other"
-
-        ],
-
+        values: ['kg', 'no(s)', 'ml', 'gms', 'dozens', 'other'],
       },
 
-cost_price: {
+      cost_price: {
         type: DataTypes.INTEGER,
-
       },
 
-pujari_selling_price: {
+      pujari_selling_price: {
         type: DataTypes.INTEGER,
-
       },
 
-customer_mrp: {
+      customer_mrp: {
         type: DataTypes.INTEGER,
-
       },
 
-karishye_provided: {
+      karishye_provided: {
         type: DataTypes.ENUM,
 
-        values: [
-
-"stocks",
-
-"does_not_stock",
-
-"does_not_stock_but_can_supply"
-
-        ],
-
+        values: ['stocks', 'does_not_stock', 'does_not_stock_but_can_supply'],
       },
 
       importHash: {
@@ -94,7 +64,6 @@ karishye_provided: {
   );
 
   samagri.associate = (db) => {
-
     db.samagri.belongsTo(db.users, {
       as: 'createdBy',
     });
@@ -106,4 +75,3 @@ karishye_provided: {
 
   return samagri;
 };
-

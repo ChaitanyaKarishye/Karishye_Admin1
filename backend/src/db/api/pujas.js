@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,72 +7,35 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class PujasDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const pujas = await db.pujas.create(
-  {
-  id: data.id || undefined,
+    const pujas = await db.pujas.create(
+      {
+        id: data.id || undefined,
 
-    name: data.name
-    ||
-    null
-,
+        name: data.name || null,
+        description: data.description || null,
+        language: data.language || null,
+        region: data.region || null,
+        mode1: data.mode1 || null,
+        videos: data.videos || null,
+        images: data.images || null,
+        mode2: data.mode2 || null,
+        mode3: data.mode3 || null,
+        importHash: data.importHash || null,
+        createdById: currentUser.id,
+        updatedById: currentUser.id,
+      },
+      { transaction },
+    );
 
-    description: data.description
-    ||
-    null
-,
-
-    language: data.language
-    ||
-    null
-,
-
-    region: data.region
-    ||
-    null
-,
-
-    mode1: data.mode1
-    ||
-    null
-,
-
-    videos: data.videos
-    ||
-    null
-,
-
-    images: data.images
-    ||
-    null
-,
-
-    mode2: data.mode2
-    ||
-    null
-,
-
-    mode3: data.mode3
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return pujas;
+    return pujas;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const pujas = await db.pujas.findByPk(id, {
@@ -82,74 +44,40 @@ module.exports = class PujasDBApi {
 
     await pujas.update(
       {
-
-        name: data.name
-        ||
-        null
-,
-
-        description: data.description
-        ||
-        null
-,
-
-        language: data.language
-        ||
-        null
-,
-
-        region: data.region
-        ||
-        null
-,
-
-        mode1: data.mode1
-        ||
-        null
-,
-
-        videos: data.videos
-        ||
-        null
-,
-
-        images: data.images
-        ||
-        null
-,
-
-        mode2: data.mode2
-        ||
-        null
-,
-
-        mode3: data.mode3
-        ||
-        null
-,
-
+        name: data.name || null,
+        description: data.description || null,
+        language: data.language || null,
+        region: data.region || null,
+        mode1: data.mode1 || null,
+        videos: data.videos || null,
+        images: data.images || null,
+        mode2: data.mode2 || null,
+        mode3: data.mode3 || null,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     return pujas;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const pujas = await db.pujas.findByPk(id, options);
 
-    await pujas.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await pujas.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await pujas.destroy({
-      transaction
+      transaction,
     });
 
     return pujas;
@@ -158,16 +86,13 @@ module.exports = class PujasDBApi {
   static async findBy(where, options) {
     const transaction = (options && options.transaction) || undefined;
 
-    const pujas = await db.pujas.findOne(
-      { where },
-      { transaction },
-    );
+    const pujas = await db.pujas.findOne({ where }, { transaction });
 
     if (!pujas) {
       return pujas;
     }
 
-    const output = pujas.get({plain: true});
+    const output = pujas.get({ plain: true });
 
     return output;
   }
@@ -183,9 +108,7 @@ module.exports = class PujasDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [];
 
     if (filter) {
       if (filter.id) {
@@ -198,55 +121,35 @@ module.exports = class PujasDBApi {
       if (filter.name) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'pujas',
-            'name',
-            filter.name,
-          ),
+          [Op.and]: Utils.ilike('pujas', 'name', filter.name),
         };
       }
 
       if (filter.description) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'pujas',
-            'description',
-            filter.description,
-          ),
+          [Op.and]: Utils.ilike('pujas', 'description', filter.description),
         };
       }
 
       if (filter.region) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'pujas',
-            'region',
-            filter.region,
-          ),
+          [Op.and]: Utils.ilike('pujas', 'region', filter.region),
         };
       }
 
       if (filter.videos) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'pujas',
-            'videos',
-            filter.videos,
-          ),
+          [Op.and]: Utils.ilike('pujas', 'videos', filter.videos),
         };
       }
 
       if (filter.images) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'pujas',
-            'images',
-            filter.images,
-          ),
+          [Op.and]: Utils.ilike('pujas', 'images', filter.images),
         };
       }
 
@@ -258,9 +161,7 @@ module.exports = class PujasDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -317,24 +218,23 @@ module.exports = class PujasDBApi {
       }
     }
 
-    let { rows, count } = await db.pujas.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.pujas.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -346,17 +246,13 @@ module.exports = class PujasDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'pujas',
-            'id',
-            query,
-          ),
+          Utils.ilike('pujas', 'id', query),
         ],
       };
     }
 
     const records = await db.pujas.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -367,6 +263,4 @@ module.exports = class PujasDBApi {
       label: record.id,
     }));
   }
-
 };
-

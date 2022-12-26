@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,72 +7,39 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class Puja_modelsDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const puja_models = await db.puja_models.create(
-  {
-  id: data.id || undefined,
+    const puja_models = await db.puja_models.create(
+      {
+        id: data.id || undefined,
 
-    duration: data.duration
-    ||
-    null
-,
+        duration: data.duration || null,
+        pujari_cost: data.pujari_cost || null,
+        no_of_pujaris: data.no_of_pujaris || null,
+        model_selling_price: data.model_selling_price || null,
+        advance_amount: data.advance_amount || null,
+        is_popular_model: data.is_popular_model || false,
 
-    pujari_cost: data.pujari_cost
-    ||
-    null
-,
-
-    no_of_pujaris: data.no_of_pujaris
-    ||
-    null
-,
-
-    model_selling_price: data.model_selling_price
-    ||
-    null
-,
-
-    advance_amount: data.advance_amount
-    ||
-    null
-,
-
-    is_popular_model: data.is_popular_model
-    ||
-    false
-
-,
-
-    name: data.name
-    ||
-    null
-,
-
-    indicative_cost_price: data.indicative_cost_price
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
+        name: data.name || null,
+        indicative_cost_price: data.indicative_cost_price || null,
+        importHash: data.importHash || null,
+        createdById: currentUser.id,
+        updatedById: currentUser.id,
+      },
+      { transaction },
+    );
 
     await puja_models.setPuja_id(data.puja_id || null, {
-    transaction,
+      transaction,
     });
 
-  return puja_models;
+    return puja_models;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const puja_models = await db.puja_models.findByPk(id, {
@@ -82,51 +48,18 @@ module.exports = class Puja_modelsDBApi {
 
     await puja_models.update(
       {
+        duration: data.duration || null,
+        pujari_cost: data.pujari_cost || null,
+        no_of_pujaris: data.no_of_pujaris || null,
+        model_selling_price: data.model_selling_price || null,
+        advance_amount: data.advance_amount || null,
+        is_popular_model: data.is_popular_model || false,
 
-        duration: data.duration
-        ||
-        null
-,
-
-        pujari_cost: data.pujari_cost
-        ||
-        null
-,
-
-        no_of_pujaris: data.no_of_pujaris
-        ||
-        null
-,
-
-        model_selling_price: data.model_selling_price
-        ||
-        null
-,
-
-        advance_amount: data.advance_amount
-        ||
-        null
-,
-
-        is_popular_model: data.is_popular_model
-        ||
-        false
-
-,
-
-        name: data.name
-        ||
-        null
-,
-
-        indicative_cost_price: data.indicative_cost_price
-        ||
-        null
-,
-
+        name: data.name || null,
+        indicative_cost_price: data.indicative_cost_price || null,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     await puja_models.setPuja_id(data.puja_id || null, {
@@ -137,19 +70,22 @@ module.exports = class Puja_modelsDBApi {
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const puja_models = await db.puja_models.findByPk(id, options);
 
-    await puja_models.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await puja_models.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await puja_models.destroy({
-      transaction
+      transaction,
     });
 
     return puja_models;
@@ -167,10 +103,10 @@ module.exports = class Puja_modelsDBApi {
       return puja_models;
     }
 
-    const output = puja_models.get({plain: true});
+    const output = puja_models.get({ plain: true });
 
     output.puja_id = await puja_models.getPuja_id({
-      transaction
+      transaction,
     });
 
     return output;
@@ -188,12 +124,10 @@ module.exports = class Puja_modelsDBApi {
     const transaction = (options && options.transaction) || undefined;
     let where = {};
     let include = [
-
       {
         model: db.pujas,
         as: 'puja_id',
       },
-
     ];
 
     if (filter) {
@@ -207,11 +141,7 @@ module.exports = class Puja_modelsDBApi {
       if (filter.name) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'puja_models',
-            'name',
-            filter.name,
-          ),
+          [Op.and]: Utils.ilike('puja_models', 'name', filter.name),
         };
       }
 
@@ -367,9 +297,7 @@ module.exports = class Puja_modelsDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -381,13 +309,13 @@ module.exports = class Puja_modelsDBApi {
       }
 
       if (filter.puja_id) {
-        var listItems = filter.puja_id.split('|').map(item => {
-          return  Utils.uuid(item)
+        var listItems = filter.puja_id.split('|').map((item) => {
+          return Utils.uuid(item);
         });
 
         where = {
           ...where,
-          puja_idId: {[Op.or]: listItems}
+          puja_idId: { [Op.or]: listItems },
         };
       }
 
@@ -416,24 +344,23 @@ module.exports = class Puja_modelsDBApi {
       }
     }
 
-    let { rows, count } = await db.puja_models.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.puja_models.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -445,17 +372,13 @@ module.exports = class Puja_modelsDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'puja_models',
-            'id',
-            query,
-          ),
+          Utils.ilike('puja_models', 'id', query),
         ],
       };
     }
 
     const records = await db.puja_models.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -466,6 +389,4 @@ module.exports = class Puja_modelsDBApi {
       label: record.id,
     }));
   }
-
 };
-

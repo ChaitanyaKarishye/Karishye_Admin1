@@ -50,10 +50,7 @@ const Puja_modelsSelectItem = (props) => {
     },
   };
 
-  const {
-    form,
-    ...rest
-  } = props;
+  const { form, ...rest } = props;
 
   return (
     <React.Fragment>
@@ -66,12 +63,10 @@ const Puja_modelsSelectItem = (props) => {
       />
     </React.Fragment>
   );
-}
+};
 
 const select = (state) => ({
-  hasPermissionToCreate: state.puja_models.hasPermissionToCreate
+  hasPermissionToCreate: state.puja_models.hasPermissionToCreate,
 });
 
-export default connect(select)(
-  Puja_modelsSelectItem,
-);
+export default connect(select)(Puja_modelsSelectItem);

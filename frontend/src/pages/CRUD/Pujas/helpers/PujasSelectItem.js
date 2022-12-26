@@ -50,10 +50,7 @@ const PujasSelectItem = (props) => {
     },
   };
 
-  const {
-    form,
-    ...rest
-  } = props;
+  const { form, ...rest } = props;
 
   return (
     <React.Fragment>
@@ -66,12 +63,10 @@ const PujasSelectItem = (props) => {
       />
     </React.Fragment>
   );
-}
+};
 
 const select = (state) => ({
-  hasPermissionToCreate: state.pujas.hasPermissionToCreate
+  hasPermissionToCreate: state.pujas.hasPermissionToCreate,
 });
 
-export default connect(select)(
-  PujasSelectItem,
-);
+export default connect(select)(PujasSelectItem);

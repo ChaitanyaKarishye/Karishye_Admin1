@@ -1,111 +1,81 @@
-
 const karusersFields = {
-	id: { type: 'id', label: 'ID' },
+  id: { type: 'id', label: 'ID' },
 
-    name: { type: 'string', label: 'Name',
+  name: {
+    type: 'string',
+    label: 'Name',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  surname: {
+    type: 'string',
+    label: 'Surname',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  date_of_birth: {
+    type: 'datetime',
+    label: 'Date Of Birth',
 
-    surname: { type: 'string', label: 'Surname',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  date_of_registration: {
+    type: 'datetime',
+    label: 'Date Of Registration',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  address: {
+    type: 'string',
+    label: 'Address',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    date_of_birth: { type: 'datetime', label: 'Date Of Birth',
+  gothram: {
+    type: 'string',
+    label: 'Gothram',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  nakshatram: {
+    type: 'string',
+    label: 'Nakshatram',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  email_id: {
+    type: 'string',
+    label: 'Email Id',
 
-    date_of_registration: { type: 'datetime', label: 'Date Of Registration',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    address: { type: 'string', label: 'Address',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    gothram: { type: 'string', label: 'Gothram',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    nakshatram: { type: 'string', label: 'Nakshatram',
+  gender: {
+    type: 'enum',
+    label: 'Gender',
 
     options: [
+      { value: 'Male', label: 'Male' },
 
-    { value: 'value', label: 'value' },
+      { value: 'Female', label: 'Female' },
 
-]
+      { value: 'Other', label: 'Other' },
+    ],
+  },
 
-    },
+  is_karishye_sourced: {
+    type: 'boolean',
+    label: 'Is Karishye Sourced',
 
-    email_id: { type: 'string', label: 'Email Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    gender: { type: 'enum', label: 'Gender',
-
-    options: [
-
-    { value: 'Male', label: 'Male' },
-
-    { value: 'Female', label: 'Female' },
-
-    { value: 'Other', label: 'Other' },
-
-]
-
-    },
-
-    is_karishye_sourced: { type: 'boolean', label: 'Is Karishye Sourced',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-}
+    options: [{ value: 'value', label: 'value' }],
+  },
+};
 
 export default karusersFields;

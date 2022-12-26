@@ -30,119 +30,118 @@ import Puja_modelsSelectItem from 'pages/CRUD/Puja_models/helpers/Puja_modelsSel
 import SamagriSelectItem from 'pages/CRUD/Samagri/helpers/SamagriSelectItem';
 
 const Puja_model_samagri_mappingsForm = (props) => {
-
   const {
-  isEditing,
-  isProfile,
-  findLoading,
-  saveLoading,
-  record,
-  onSubmit,
-  onCancel,
-  modal
+    isEditing,
+    isProfile,
+    findLoading,
+    saveLoading,
+    record,
+    onSubmit,
+    onCancel,
+    modal,
   } = props;
 
   const iniValues = () => {
-  return IniValues(puja_model_samagri_mappingsFields, record || {});
-  }
+    return IniValues(puja_model_samagri_mappingsFields, record || {});
+  };
 
   const formValidations = () => {
-  return FormValidations(puja_model_samagri_mappingsFields, record || {});
-  }
+    return FormValidations(puja_model_samagri_mappingsFields, record || {});
+  };
 
   const handleSubmit = (values) => {
-  const { id, ...data } = PreparedValues(puja_model_samagri_mappingsFields, values || {});
-  onSubmit(id, data);
+    const { id, ...data } = PreparedValues(
+      puja_model_samagri_mappingsFields,
+      values || {},
+    );
+    onSubmit(id, data);
   };
 
   const title = () => {
-  if(isProfile) {
-  return 'Edit My Profile';
-  }
+    if (isProfile) {
+      return 'Edit My Profile';
+    }
 
-  return isEditing
-  ? 'Edit Puja_model_samagri_mappings'
-  : 'Add Puja_model_samagri_mappings';
+    return isEditing
+      ? 'Edit Puja_model_samagri_mappings'
+      : 'Add Puja_model_samagri_mappings';
   };
 
   const renderForm = () => (
-  <Widget title={<h4>{title()}</h4>} collapse close>
-  <Formik
-          onSubmit={handleSubmit}
-  initialValues={iniValues()}
-  validationSchema={formValidations()}
-  >
-  {(form) => (
-  <form onSubmit={form.handleSubmit}>
-    <Grid container spacing={3} direction="column">
-
-      <Grid item>
-        <InputFormItem
-          name={'no_of_standard_qty'}
-          schema={puja_model_samagri_mappingsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <Puja_modelsSelectItem
-        name={'model_id'}
-        schema={puja_model_samagri_mappingsFields}
-        showCreate={!modal}
-        form={form}
-        />
-      </Grid>
-
-      <Grid item>
-        <SamagriSelectItem
-        name={'samagri_id'}
-        schema={puja_model_samagri_mappingsFields}
-        showCreate={!modal}
-        form={form}
-        />
-      </Grid>
-
-  </Grid>
-  <Grid container spacing={3} mt={2}>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={form.handleSubmit}
+    <Widget title={<h4>{title()}</h4>} collapse close>
+      <Formik
+        onSubmit={handleSubmit}
+        initialValues={iniValues()}
+        validationSchema={formValidations()}
       >
-        Save
-      </Button>
-    </Grid>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="outlined"
-        onClick={form.handleReset}
-      >
-        Reset
-      </Button>
-    </Grid>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="outlined"
-        onClick={() => onCancel()}
-      >
-        Cancel
-      </Button>
-    </Grid>
-  </Grid>
-      </form>
-      )
-      }
-    </Formik>
-  </Widget>
+        {(form) => (
+          <form onSubmit={form.handleSubmit}>
+            <Grid container spacing={3} direction='column'>
+              <Grid item>
+                <InputFormItem
+                  name={'no_of_standard_qty'}
+                  schema={puja_model_samagri_mappingsFields}
+                />
+              </Grid>
+
+              <Grid item>
+                <Puja_modelsSelectItem
+                  name={'model_id'}
+                  schema={puja_model_samagri_mappingsFields}
+                  showCreate={!modal}
+                  form={form}
+                />
+              </Grid>
+
+              <Grid item>
+                <SamagriSelectItem
+                  name={'samagri_id'}
+                  schema={puja_model_samagri_mappingsFields}
+                  showCreate={!modal}
+                  form={form}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} mt={2}>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='contained'
+                  onClick={form.handleSubmit}
+                >
+                  Save
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='outlined'
+                  onClick={form.handleReset}
+                >
+                  Reset
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='outlined'
+                  onClick={() => onCancel()}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        )}
+      </Formik>
+    </Widget>
   );
   if (findLoading) {
-  return <Loader />;
+    return <Loader />;
   }
   if (isEditing && !record) {
-  return <Loader />;
+    return <Loader />;
   }
   return renderForm();
-  }
-  export default Puja_model_samagri_mappingsForm;
+};
+export default Puja_model_samagri_mappingsForm;

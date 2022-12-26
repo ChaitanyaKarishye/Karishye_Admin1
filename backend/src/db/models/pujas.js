@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const pujas = sequelize.define(
     'pujas',
     {
@@ -14,93 +14,48 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-name: {
+      name: {
         type: DataTypes.TEXT,
-
       },
 
-description: {
+      description: {
         type: DataTypes.TEXT,
-
       },
 
-language: {
+      language: {
         type: DataTypes.ENUM,
 
-        values: [
-
-"Telugu",
-
-"Other"
-
-        ],
-
+        values: ['Telugu', 'Other'],
       },
 
-region: {
+      region: {
         type: DataTypes.TEXT,
-
       },
 
-mode1: {
+      mode1: {
         type: DataTypes.ENUM,
 
-        values: [
-
-"remote",
-
-"at_my_home",
-
-"near_my_home",
-
-"on_behalf"
-
-        ],
-
+        values: ['remote', 'at_my_home', 'near_my_home', 'on_behalf'],
       },
 
-videos: {
+      videos: {
         type: DataTypes.TEXT,
-
       },
 
-images: {
+      images: {
         type: DataTypes.TEXT,
-
       },
 
-mode2: {
+      mode2: {
         type: DataTypes.ENUM,
 
-        values: [
-
-"remote",
-
-"at_my_home",
-
-"near_my_home",
-
-"on_behalf"
-
-        ],
-
+        values: ['remote', 'at_my_home', 'near_my_home', 'on_behalf'],
       },
 
-mode3: {
+      mode3: {
         type: DataTypes.ENUM,
 
-        values: [
-
-"remote",
-
-"at_my_home",
-
-"near_my_home",
-
-"on_behalf"
-
-        ],
-
+        values: ['remote', 'at_my_home', 'near_my_home', 'on_behalf'],
       },
 
       importHash: {
@@ -117,7 +72,6 @@ mode3: {
   );
 
   pujas.associate = (db) => {
-
     db.pujas.belongsTo(db.users, {
       as: 'createdBy',
     });
@@ -129,4 +83,3 @@ mode3: {
 
   return pujas;
 };
-

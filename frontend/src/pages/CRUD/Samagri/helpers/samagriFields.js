@@ -1,101 +1,82 @@
-
 const samagriFields = {
-	id: { type: 'id', label: 'ID' },
+  id: { type: 'id', label: 'ID' },
 
-    name: { type: 'string', label: 'Name',
+  name: {
+    type: 'string',
+    label: 'Name',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  description: {
+    type: 'string',
+    label: 'Description',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  standard_qty: {
+    type: 'int',
+    label: 'Standard Qty',
 
-    description: { type: 'string', label: 'Description',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    standard_qty: { type: 'int', label: 'Standard Qty',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    qty_units: { type: 'enum', label: 'Qty Units',
+  qty_units: {
+    type: 'enum',
+    label: 'Qty Units',
 
     options: [
+      { value: 'kg', label: 'kg' },
 
-    { value: 'kg', label: 'kg' },
+      { value: 'no(s)', label: 'no(s)' },
 
-    { value: 'no(s)', label: 'no(s)' },
+      { value: 'ml', label: 'ml' },
 
-    { value: 'ml', label: 'ml' },
+      { value: 'gms', label: 'gms' },
 
-    { value: 'gms', label: 'gms' },
+      { value: 'dozens', label: 'dozens' },
 
-    { value: 'dozens', label: 'dozens' },
+      { value: 'other', label: 'other' },
+    ],
+  },
 
-    { value: 'other', label: 'other' },
+  cost_price: {
+    type: 'int',
+    label: 'Cost Price',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  pujari_selling_price: {
+    type: 'int',
+    label: 'Pujari Selling Price',
 
-    cost_price: { type: 'int', label: 'Cost Price',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  customer_mrp: {
+    type: 'int',
+    label: 'Customer Mrp',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
-
-    },
-
-    pujari_selling_price: { type: 'int', label: 'Pujari Selling Price',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    customer_mrp: { type: 'int', label: 'Customer Mrp',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    karishye_provided: { type: 'enum', label: 'Karishye Provided',
+  karishye_provided: {
+    type: 'enum',
+    label: 'Karishye Provided',
 
     options: [
+      { value: 'stocks', label: 'stocks' },
 
-    { value: 'stocks', label: 'stocks' },
+      { value: 'does_not_stock', label: 'does_not_stock' },
 
-    { value: 'does_not_stock', label: 'does_not_stock' },
-
-    { value: 'does_not_stock_but_can_supply', label: 'does_not_stock_but_can_supply' },
-
-]
-
-    },
-
-}
+      {
+        value: 'does_not_stock_but_can_supply',
+        label: 'does_not_stock_but_can_supply',
+      },
+    ],
+  },
+};
 
 export default samagriFields;

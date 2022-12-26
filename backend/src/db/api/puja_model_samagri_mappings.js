@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,57 +7,49 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class Puja_model_samagri_mappingsDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
-
-  const puja_model_samagri_mappings = await db.puja_model_samagri_mappings.create(
-  {
-  id: data.id || undefined,
-
-    no_of_standard_qty: data.no_of_standard_qty
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-    await puja_model_samagri_mappings.setModel_id(data.model_id || null, {
-    transaction,
-    });
-
-    await puja_model_samagri_mappings.setSamagri_id(data.samagri_id || null, {
-    transaction,
-    });
-
-  return puja_model_samagri_mappings;
-  }
-
-  static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
-    const puja_model_samagri_mappings = await db.puja_model_samagri_mappings.findByPk(id, {
+    const puja_model_samagri_mappings =
+      await db.puja_model_samagri_mappings.create(
+        {
+          id: data.id || undefined,
+
+          no_of_standard_qty: data.no_of_standard_qty || null,
+          importHash: data.importHash || null,
+          createdById: currentUser.id,
+          updatedById: currentUser.id,
+        },
+        { transaction },
+      );
+
+    await puja_model_samagri_mappings.setModel_id(data.model_id || null, {
       transaction,
     });
 
+    await puja_model_samagri_mappings.setSamagri_id(data.samagri_id || null, {
+      transaction,
+    });
+
+    return puja_model_samagri_mappings;
+  }
+
+  static async update(id, data, options) {
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
+
+    const puja_model_samagri_mappings =
+      await db.puja_model_samagri_mappings.findByPk(id, {
+        transaction,
+      });
+
     await puja_model_samagri_mappings.update(
       {
-
-        no_of_standard_qty: data.no_of_standard_qty
-        ||
-        null
-,
-
+        no_of_standard_qty: data.no_of_standard_qty || null,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     await puja_model_samagri_mappings.setModel_id(data.model_id || null, {
@@ -73,19 +64,23 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
-    const puja_model_samagri_mappings = await db.puja_model_samagri_mappings.findByPk(id, options);
+    const puja_model_samagri_mappings =
+      await db.puja_model_samagri_mappings.findByPk(id, options);
 
-    await puja_model_samagri_mappings.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await puja_model_samagri_mappings.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await puja_model_samagri_mappings.destroy({
-      transaction
+      transaction,
     });
 
     return puja_model_samagri_mappings;
@@ -94,23 +89,21 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
   static async findBy(where, options) {
     const transaction = (options && options.transaction) || undefined;
 
-    const puja_model_samagri_mappings = await db.puja_model_samagri_mappings.findOne(
-      { where },
-      { transaction },
-    );
+    const puja_model_samagri_mappings =
+      await db.puja_model_samagri_mappings.findOne({ where }, { transaction });
 
     if (!puja_model_samagri_mappings) {
       return puja_model_samagri_mappings;
     }
 
-    const output = puja_model_samagri_mappings.get({plain: true});
+    const output = puja_model_samagri_mappings.get({ plain: true });
 
     output.model_id = await puja_model_samagri_mappings.getModel_id({
-      transaction
+      transaction,
     });
 
     output.samagri_id = await puja_model_samagri_mappings.getSamagri_id({
-      transaction
+      transaction,
     });
 
     return output;
@@ -128,7 +121,6 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
     const transaction = (options && options.transaction) || undefined;
     let where = {};
     let include = [
-
       {
         model: db.puja_models,
         as: 'model_id',
@@ -138,7 +130,6 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
         model: db.samagri,
         as: 'samagri_id',
       },
-
     ];
 
     if (filter) {
@@ -181,31 +172,29 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
       if (filter.model_id) {
-        var listItems = filter.model_id.split('|').map(item => {
-          return  Utils.uuid(item)
+        var listItems = filter.model_id.split('|').map((item) => {
+          return Utils.uuid(item);
         });
 
         where = {
           ...where,
-          model_idId: {[Op.or]: listItems}
+          model_idId: { [Op.or]: listItems },
         };
       }
 
       if (filter.samagri_id) {
-        var listItems = filter.samagri_id.split('|').map(item => {
-          return  Utils.uuid(item)
+        var listItems = filter.samagri_id.split('|').map((item) => {
+          return Utils.uuid(item);
         });
 
         where = {
           ...where,
-          samagri_idId: {[Op.or]: listItems}
+          samagri_idId: { [Op.or]: listItems },
         };
       }
 
@@ -234,24 +223,23 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
       }
     }
 
-    let { rows, count } = await db.puja_model_samagri_mappings.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.puja_model_samagri_mappings.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -263,17 +251,13 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'puja_model_samagri_mappings',
-            'id',
-            query,
-          ),
+          Utils.ilike('puja_model_samagri_mappings', 'id', query),
         ],
       };
     }
 
     const records = await db.puja_model_samagri_mappings.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -284,6 +268,4 @@ module.exports = class Puja_model_samagri_mappingsDBApi {
       label: record.id,
     }));
   }
-
 };
-

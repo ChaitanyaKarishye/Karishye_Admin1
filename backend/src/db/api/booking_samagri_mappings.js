@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,88 +7,71 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class Booking_samagri_mappingsDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const booking_samagri_mappings = await db.booking_samagri_mappings.create(
-  {
-  id: data.id || undefined,
+    const booking_samagri_mappings = await db.booking_samagri_mappings.create(
+      {
+        id: data.id || undefined,
 
-    booking_id: data.booking_id
-    ||
-    null
-,
+        booking_id: data.booking_id || null,
+        samagri_id: data.samagri_id || null,
+        no_of_standard_qty: data.no_of_standard_qty || null,
+        importHash: data.importHash || null,
+        createdById: currentUser.id,
+        updatedById: currentUser.id,
+      },
+      { transaction },
+    );
 
-    samagri_id: data.samagri_id
-    ||
-    null
-,
-
-    no_of_standard_qty: data.no_of_standard_qty
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return booking_samagri_mappings;
+    return booking_samagri_mappings;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
-    const booking_samagri_mappings = await db.booking_samagri_mappings.findByPk(id, {
-      transaction,
-    });
+    const booking_samagri_mappings = await db.booking_samagri_mappings.findByPk(
+      id,
+      {
+        transaction,
+      },
+    );
 
     await booking_samagri_mappings.update(
       {
-
-        booking_id: data.booking_id
-        ||
-        null
-,
-
-        samagri_id: data.samagri_id
-        ||
-        null
-,
-
-        no_of_standard_qty: data.no_of_standard_qty
-        ||
-        null
-,
-
+        booking_id: data.booking_id || null,
+        samagri_id: data.samagri_id || null,
+        no_of_standard_qty: data.no_of_standard_qty || null,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     return booking_samagri_mappings;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
-    const booking_samagri_mappings = await db.booking_samagri_mappings.findByPk(id, options);
+    const booking_samagri_mappings = await db.booking_samagri_mappings.findByPk(
+      id,
+      options,
+    );
 
-    await booking_samagri_mappings.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await booking_samagri_mappings.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await booking_samagri_mappings.destroy({
-      transaction
+      transaction,
     });
 
     return booking_samagri_mappings;
@@ -107,7 +89,7 @@ module.exports = class Booking_samagri_mappingsDBApi {
       return booking_samagri_mappings;
     }
 
-    const output = booking_samagri_mappings.get({plain: true});
+    const output = booking_samagri_mappings.get({ plain: true });
 
     return output;
   }
@@ -123,9 +105,7 @@ module.exports = class Booking_samagri_mappingsDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [];
 
     if (filter) {
       if (filter.id) {
@@ -215,9 +195,7 @@ module.exports = class Booking_samagri_mappingsDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -246,24 +224,23 @@ module.exports = class Booking_samagri_mappingsDBApi {
       }
     }
 
-    let { rows, count } = await db.booking_samagri_mappings.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.booking_samagri_mappings.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -275,17 +252,13 @@ module.exports = class Booking_samagri_mappingsDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'booking_samagri_mappings',
-            'id',
-            query,
-          ),
+          Utils.ilike('booking_samagri_mappings', 'id', query),
         ],
       };
     }
 
     const records = await db.booking_samagri_mappings.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -296,6 +269,4 @@ module.exports = class Booking_samagri_mappingsDBApi {
       label: record.id,
     }));
   }
-
 };
-

@@ -1,157 +1,120 @@
-
 const bookingsFields = {
-	id: { type: 'id', label: 'ID' },
+  id: { type: 'id', label: 'ID' },
 
-    user_id: { type: 'int', label: 'User Id',
+  user_id: {
+    type: 'int',
+    label: 'User Id',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  pujari_id: {
+    type: 'int',
+    label: 'Pujari Id',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  puja_id: {
+    type: 'int',
+    label: 'Puja Id',
 
-    pujari_id: { type: 'int', label: 'Pujari Id',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  notes: {
+    type: 'string',
+    label: 'Notes',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  price: {
+    type: 'int',
+    label: 'Price',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    puja_id: { type: 'int', label: 'Puja Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    notes: { type: 'string', label: 'Notes',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    price: { type: 'int', label: 'Price',
+  event_type: {
+    type: 'enum',
+    label: 'Event Type',
 
     options: [
+      { value: 'At my home', label: 'At my home' },
 
-    { value: 'value', label: 'value' },
+      { value: 'Near my home', label: 'Near my home' },
 
-]
+      { value: 'Online', label: 'Online' },
 
-    },
+      { value: 'On your behalf', label: 'On your behalf' },
 
-    event_type: { type: 'enum', label: 'Event Type',
+      { value: 'Other', label: 'Other' },
+    ],
+  },
 
-    options: [
+  address: {
+    type: 'string',
+    label: 'Address',
 
-    { value: 'At my home', label: 'At my home' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'Near my home', label: 'Near my home' },
+  start_date: {
+    type: 'datetime',
+    label: 'Start Date',
 
-    { value: 'Online', label: 'Online' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'On your behalf', label: 'On your behalf' },
+  end_date: {
+    type: 'datetime',
+    label: 'End Date',
 
-    { value: 'Other', label: 'Other' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  duration_hrs: {
+    type: 'int',
+    label: 'Duration Hrs',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    address: { type: 'string', label: 'Address',
+  base_price: {
+    type: 'int',
+    label: 'Base Price',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  final_price: {
+    type: 'int',
+    label: 'Final Price',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
-
-    start_date: { type: 'datetime', label: 'Start Date',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    end_date: { type: 'datetime', label: 'End Date',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    duration_hrs: { type: 'int', label: 'Duration Hrs',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    base_price: { type: 'int', label: 'Base Price',
+  status: {
+    type: 'enum',
+    label: 'Status',
 
     options: [
+      { value: 'under review', label: 'under review' },
 
-    { value: 'value', label: 'value' },
+      { value: 'pending payment', label: 'pending payment' },
 
-]
+      { value: 'confirmed', label: 'confirmed' },
 
-    },
+      { value: 'material dispatched', label: 'material dispatched' },
 
-    final_price: { type: 'int', label: 'Final Price',
+      { value: 'completed', label: 'completed' },
 
-    options: [
+      { value: 'suspended', label: 'suspended' },
 
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    status: { type: 'enum', label: 'Status',
-
-    options: [
-
-    { value: 'under review', label: 'under review' },
-
-    { value: 'pending payment', label: 'pending payment' },
-
-    { value: 'confirmed', label: 'confirmed' },
-
-    { value: 'material dispatched', label: 'material dispatched' },
-
-    { value: 'completed', label: 'completed' },
-
-    { value: 'suspended', label: 'suspended' },
-
-    { value: 'cancelled', label: 'cancelled' },
-
-]
-
-    },
-
-}
+      { value: 'cancelled', label: 'cancelled' },
+    ],
+  },
+};
 
 export default bookingsFields;

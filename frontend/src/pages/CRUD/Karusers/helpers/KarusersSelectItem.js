@@ -50,10 +50,7 @@ const KarusersSelectItem = (props) => {
     },
   };
 
-  const {
-    form,
-    ...rest
-  } = props;
+  const { form, ...rest } = props;
 
   return (
     <React.Fragment>
@@ -66,12 +63,10 @@ const KarusersSelectItem = (props) => {
       />
     </React.Fragment>
   );
-}
+};
 
 const select = (state) => ({
-  hasPermissionToCreate: state.karusers.hasPermissionToCreate
+  hasPermissionToCreate: state.karusers.hasPermissionToCreate,
 });
 
-export default connect(select)(
-  KarusersSelectItem,
-);
+export default connect(select)(KarusersSelectItem);

@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,67 +7,34 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class SamagriDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const samagri = await db.samagri.create(
-  {
-  id: data.id || undefined,
+    const samagri = await db.samagri.create(
+      {
+        id: data.id || undefined,
 
-    name: data.name
-    ||
-    null
-,
+        name: data.name || null,
+        description: data.description || null,
+        standard_qty: data.standard_qty || null,
+        qty_units: data.qty_units || null,
+        cost_price: data.cost_price || null,
+        pujari_selling_price: data.pujari_selling_price || null,
+        customer_mrp: data.customer_mrp || null,
+        karishye_provided: data.karishye_provided || null,
+        importHash: data.importHash || null,
+        createdById: currentUser.id,
+        updatedById: currentUser.id,
+      },
+      { transaction },
+    );
 
-    description: data.description
-    ||
-    null
-,
-
-    standard_qty: data.standard_qty
-    ||
-    null
-,
-
-    qty_units: data.qty_units
-    ||
-    null
-,
-
-    cost_price: data.cost_price
-    ||
-    null
-,
-
-    pujari_selling_price: data.pujari_selling_price
-    ||
-    null
-,
-
-    customer_mrp: data.customer_mrp
-    ||
-    null
-,
-
-    karishye_provided: data.karishye_provided
-    ||
-    null
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return samagri;
+    return samagri;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const samagri = await db.samagri.findByPk(id, {
@@ -77,69 +43,39 @@ module.exports = class SamagriDBApi {
 
     await samagri.update(
       {
-
-        name: data.name
-        ||
-        null
-,
-
-        description: data.description
-        ||
-        null
-,
-
-        standard_qty: data.standard_qty
-        ||
-        null
-,
-
-        qty_units: data.qty_units
-        ||
-        null
-,
-
-        cost_price: data.cost_price
-        ||
-        null
-,
-
-        pujari_selling_price: data.pujari_selling_price
-        ||
-        null
-,
-
-        customer_mrp: data.customer_mrp
-        ||
-        null
-,
-
-        karishye_provided: data.karishye_provided
-        ||
-        null
-,
-
+        name: data.name || null,
+        description: data.description || null,
+        standard_qty: data.standard_qty || null,
+        qty_units: data.qty_units || null,
+        cost_price: data.cost_price || null,
+        pujari_selling_price: data.pujari_selling_price || null,
+        customer_mrp: data.customer_mrp || null,
+        karishye_provided: data.karishye_provided || null,
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     return samagri;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const samagri = await db.samagri.findByPk(id, options);
 
-    await samagri.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await samagri.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await samagri.destroy({
-      transaction
+      transaction,
     });
 
     return samagri;
@@ -148,16 +84,13 @@ module.exports = class SamagriDBApi {
   static async findBy(where, options) {
     const transaction = (options && options.transaction) || undefined;
 
-    const samagri = await db.samagri.findOne(
-      { where },
-      { transaction },
-    );
+    const samagri = await db.samagri.findOne({ where }, { transaction });
 
     if (!samagri) {
       return samagri;
     }
 
-    const output = samagri.get({plain: true});
+    const output = samagri.get({ plain: true });
 
     return output;
   }
@@ -173,9 +106,7 @@ module.exports = class SamagriDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [];
 
     if (filter) {
       if (filter.id) {
@@ -188,22 +119,14 @@ module.exports = class SamagriDBApi {
       if (filter.name) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'samagri',
-            'name',
-            filter.name,
-          ),
+          [Op.and]: Utils.ilike('samagri', 'name', filter.name),
         };
       }
 
       if (filter.description) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'samagri',
-            'description',
-            filter.description,
-          ),
+          [Op.and]: Utils.ilike('samagri', 'description', filter.description),
         };
       }
 
@@ -311,9 +234,7 @@ module.exports = class SamagriDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -356,24 +277,23 @@ module.exports = class SamagriDBApi {
       }
     }
 
-    let { rows, count } = await db.samagri.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.samagri.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -385,17 +305,13 @@ module.exports = class SamagriDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'samagri',
-            'id',
-            query,
-          ),
+          Utils.ilike('samagri', 'id', query),
         ],
       };
     }
 
     const records = await db.samagri.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -406,6 +322,4 @@ module.exports = class SamagriDBApi {
       label: record.id,
     }));
   }
-
 };
-

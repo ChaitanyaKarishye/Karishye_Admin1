@@ -5,15 +5,8 @@ import actions from 'actions/bookings/bookingsFormActions';
 import { connect } from 'react-redux';
 
 const BookingsFormPage = (props) => {
-
-  const {
-    dispatch,
-    match,
-    saveLoading,
-    findLoading,
-    record,
-    currentUser
-  } = props;
+  const { dispatch, match, saveLoading, findLoading, record, currentUser } =
+    props;
 
   const [dispatched, setDispatched] = useState(false);
 
@@ -27,9 +20,9 @@ const BookingsFormPage = (props) => {
 
   const doSubmit = (id, data) => {
     if (isEditing() || isProfile()) {
-      dispatch(actions.doUpdate(id, data, isProfile()))
+      dispatch(actions.doUpdate(id, data, isProfile()));
     } else {
-      dispatch(actions.doCreate(data))
+      dispatch(actions.doCreate(data));
     }
   };
 
@@ -42,29 +35,29 @@ const BookingsFormPage = (props) => {
         const currentUserId = currentUser.user.id;
         dispatch(actions.doFind(currentUserId));
       } else {
-        dispatch(actions.doNew())
+        dispatch(actions.doNew());
       }
     }
     setDispatched(true);
-  }, [match, dispatch])
+  }, [match, dispatch]);
 
   return (
     <React.Fragment>
       {dispatched && (
         <BookingsForm
-        saveLoading={saveLoading}
-        findLoading={findLoading}
-        currentUser={currentUser}
-        record={(isEditing() || isProfile()) ? record : {}}
-        isEditing={isEditing()}
-        isProfile={isProfile()}
-        onSubmit={doSubmit}
-        onCancel={() => dispatch(push('/admin/bookings'))}
+          saveLoading={saveLoading}
+          findLoading={findLoading}
+          currentUser={currentUser}
+          record={isEditing() || isProfile() ? record : {}}
+          isEditing={isEditing()}
+          isProfile={isProfile()}
+          onSubmit={doSubmit}
+          onCancel={() => dispatch(push('/admin/bookings'))}
         />
-        )}
+      )}
     </React.Fragment>
   );
-}
+};
 
 function mapStateToProps(store) {
   return {

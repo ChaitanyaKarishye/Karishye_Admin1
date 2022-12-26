@@ -7,6 +7,6 @@ const Puja_modelsTablePage = () => {
       <Puja_modelsTable />
     </div>
   );
-}
+};
 
 export default Puja_modelsTablePage;

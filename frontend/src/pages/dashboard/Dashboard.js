@@ -27,27 +27,58 @@ const Dashboard = () => {
   const [booking_samagri_mappings, setBooking_samagri_mappings] = useState(0);
   const [bookings, setBookings] = useState(0);
   const [puja_models, setPuja_models] = useState(0);
-  const [puja_model_samagri_mappings, setPuja_model_samagri_mappings] = useState(0);
+  const [puja_model_samagri_mappings, setPuja_model_samagri_mappings] =
+    useState(0);
 
   const [currentUser, setCurrentUser] = useState(null);
 
   async function loadData() {
-    const fns = [setUsers,setKarusers,setBooking_participants,setPujaris,setPujari_applications,setPujas,setSamagri,setBooking_samagri_mappings,setBookings,setPuja_models,setPuja_model_samagri_mappings,];
+    const fns = [
+      setUsers,
+      setKarusers,
+      setBooking_participants,
+      setPujaris,
+      setPujari_applications,
+      setPujas,
+      setSamagri,
+      setBooking_samagri_mappings,
+      setBookings,
+      setPuja_models,
+      setPuja_model_samagri_mappings,
+    ];
 
     const responseUsers = await axios.get(`/users`);
     const responseKarusers = await axios.get(`/karusers`);
-    const responseBooking_participants = await axios.get(`/booking_participants`);
+    const responseBooking_participants = await axios.get(
+      `/booking_participants`,
+    );
     const responsePujaris = await axios.get(`/pujaris`);
     const responsePujari_applications = await axios.get(`/pujari_applications`);
     const responsePujas = await axios.get(`/pujas`);
     const responseSamagri = await axios.get(`/samagri`);
-    const responseBooking_samagri_mappings = await axios.get(`/booking_samagri_mappings`);
+    const responseBooking_samagri_mappings = await axios.get(
+      `/booking_samagri_mappings`,
+    );
     const responseBookings = await axios.get(`/bookings`);
     const responsePuja_models = await axios.get(`/puja_models`);
-    const responsePuja_model_samagri_mappings = await axios.get(`/puja_model_samagri_mappings`);
-      Promise.all([responseUsers,responseKarusers,responseBooking_participants,responsePujaris,responsePujari_applications,responsePujas,responseSamagri,responseBooking_samagri_mappings,responseBookings,responsePuja_models,responsePuja_model_samagri_mappings,])
-          .then((res) => res.map((el) => el.data))
-          .then((data) => data.forEach((el, i) => fns[i](el.count)));
+    const responsePuja_model_samagri_mappings = await axios.get(
+      `/puja_model_samagri_mappings`,
+    );
+    Promise.all([
+      responseUsers,
+      responseKarusers,
+      responseBooking_participants,
+      responsePujaris,
+      responsePujari_applications,
+      responsePujas,
+      responseSamagri,
+      responseBooking_samagri_mappings,
+      responseBookings,
+      responsePuja_models,
+      responsePuja_model_samagri_mappings,
+    ])
+      .then((res) => res.map((el) => el.data))
+      .then((data) => data.forEach((el, i) => fns[i](el.count)));
   }
 
   useEffect(() => {
@@ -77,183 +108,234 @@ const Dashboard = () => {
         </small>
       </h1>
       <Grid container alignItems='center' columns={12} spacing={3}>
-
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/users'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Users'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Users: <span className={classes.widgetTextCount}>{users}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link to={'/admin/users'} style={{ textDecoration: 'none' }}>
+            <Widget title={'Users'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Users:{' '}
+                  <span className={classes.widgetTextCount}>{users}</span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/karusers'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Karusers'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Karusers: <span className={classes.widgetTextCount}>{karusers}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link to={'/admin/karusers'} style={{ textDecoration: 'none' }}>
+            <Widget title={'Karusers'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Karusers:{' '}
+                  <span className={classes.widgetTextCount}>{karusers}</span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/booking_participants'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Booking_participants'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Booking_participants: <span className={classes.widgetTextCount}>{booking_participants}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link
+            to={'/admin/booking_participants'}
+            style={{ textDecoration: 'none' }}
+          >
+            <Widget title={'Booking_participants'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Booking_participants:{' '}
+                  <span className={classes.widgetTextCount}>
+                    {booking_participants}
+                  </span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/pujaris'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Pujaris'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Pujaris: <span className={classes.widgetTextCount}>{pujaris}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link to={'/admin/pujaris'} style={{ textDecoration: 'none' }}>
+            <Widget title={'Pujaris'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Pujaris:{' '}
+                  <span className={classes.widgetTextCount}>{pujaris}</span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/pujari_applications'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Pujari_applications'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Pujari_applications: <span className={classes.widgetTextCount}>{pujari_applications}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link
+            to={'/admin/pujari_applications'}
+            style={{ textDecoration: 'none' }}
+          >
+            <Widget title={'Pujari_applications'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Pujari_applications:{' '}
+                  <span className={classes.widgetTextCount}>
+                    {pujari_applications}
+                  </span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/pujas'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Pujas'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Pujas: <span className={classes.widgetTextCount}>{pujas}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link to={'/admin/pujas'} style={{ textDecoration: 'none' }}>
+            <Widget title={'Pujas'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Pujas:{' '}
+                  <span className={classes.widgetTextCount}>{pujas}</span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/samagri'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Samagri'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Samagri: <span className={classes.widgetTextCount}>{samagri}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link to={'/admin/samagri'} style={{ textDecoration: 'none' }}>
+            <Widget title={'Samagri'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Samagri:{' '}
+                  <span className={classes.widgetTextCount}>{samagri}</span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/booking_samagri_mappings'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Booking_samagri_mappings'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Booking_samagri_mappings: <span className={classes.widgetTextCount}>{booking_samagri_mappings}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link
+            to={'/admin/booking_samagri_mappings'}
+            style={{ textDecoration: 'none' }}
+          >
+            <Widget title={'Booking_samagri_mappings'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Booking_samagri_mappings:{' '}
+                  <span className={classes.widgetTextCount}>
+                    {booking_samagri_mappings}
+                  </span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/bookings'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Bookings'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Bookings: <span className={classes.widgetTextCount}>{bookings}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link to={'/admin/bookings'} style={{ textDecoration: 'none' }}>
+            <Widget title={'Bookings'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Bookings:{' '}
+                  <span className={classes.widgetTextCount}>{bookings}</span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/puja_models'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Puja_models'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Puja_models: <span className={classes.widgetTextCount}>{puja_models}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link to={'/admin/puja_models'} style={{ textDecoration: 'none' }}>
+            <Widget title={'Puja_models'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Puja_models:{' '}
+                  <span className={classes.widgetTextCount}>{puja_models}</span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
 
-    <Grid item xs={12} sm={6} lg={4} xl={3}>
-        <Link to={'/admin/puja_model_samagri_mappings'} style={{ textDecoration: 'none' }}>
-          <Widget title={'Puja_model_samagri_mappings'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <InfoIcon color='primary' sx={{ mr: 1 }} />
-              <p className={classes.widgetText}>Puja_model_samagri_mappings: <span className={classes.widgetTextCount}>{puja_model_samagri_mappings}</span></p>
-            </div>
-          </Widget>
-        </Link>
+        <Grid item xs={12} sm={6} lg={4} xl={3}>
+          <Link
+            to={'/admin/puja_model_samagri_mappings'}
+            style={{ textDecoration: 'none' }}
+          >
+            <Widget title={'Puja_model_samagri_mappings'}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <InfoIcon color='primary' sx={{ mr: 1 }} />
+                <p className={classes.widgetText}>
+                  Puja_model_samagri_mappings:{' '}
+                  <span className={classes.widgetTextCount}>
+                    {puja_model_samagri_mappings}
+                  </span>
+                </p>
+              </div>
+            </Widget>
+          </Link>
         </Grid>
-
       </Grid>
     </div>
   );

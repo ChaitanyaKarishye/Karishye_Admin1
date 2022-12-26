@@ -1,179 +1,135 @@
-
 const pujari_applicationsFields = {
-	id: { type: 'id', label: 'ID' },
+  id: { type: 'id', label: 'ID' },
 
-    name: { type: 'string', label: 'Name',
+  name: {
+    type: 'string',
+    label: 'Name',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  surname: {
+    type: 'string',
+    label: 'Surname',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  date_of_birth: {
+    type: 'datetime',
+    label: 'Date Of Birth',
 
-    surname: { type: 'string', label: 'Surname',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  qualification: {
+    type: 'string',
+    label: 'Qualification',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  experience_yrs: {
+    type: 'int',
+    label: 'Experience Yrs',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    date_of_birth: { type: 'datetime', label: 'Date Of Birth',
+  address: {
+    type: 'string',
+    label: 'Address',
 
-    options: [
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    { value: 'value', label: 'value' },
+  email_id: {
+    type: 'string',
+    label: 'Email Id',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  phone_number: {
+    type: 'string',
+    label: 'Phone Number',
 
-    qualification: { type: 'string', label: 'Qualification',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  photo: {
+    type: 'images',
+    label: 'Photo',
 
-    { value: 'value', label: 'value' },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-]
+  video: {
+    type: 'files',
+    label: 'Video',
 
-    },
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    experience_yrs: { type: 'int', label: 'Experience Yrs',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    address: { type: 'string', label: 'Address',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    email_id: { type: 'string', label: 'Email Id',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    phone_number: { type: 'string', label: 'Phone Number',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    photo: { type: 'images', label: 'Photo',
+  gender: {
+    type: 'enum',
+    label: 'Gender',
 
     options: [
+      { value: 'Male', label: 'Male' },
 
-    { value: 'value', label: 'value' },
+      { value: 'Female', label: 'Female' },
 
-]
+      { value: 'Other', label: 'Other' },
+    ],
+  },
 
-    },
-
-    video: { type: 'files', label: 'Video',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    gender: { type: 'enum', label: 'Gender',
+  application_status: {
+    type: 'enum',
+    label: 'Application Status',
 
     options: [
+      { value: 'Pending', label: 'Pending' },
 
-    { value: 'Male', label: 'Male' },
+      { value: 'Approved', label: 'Approved' },
 
-    { value: 'Female', label: 'Female' },
+      { value: 'Rejected', label: 'Rejected' },
 
-    { value: 'Other', label: 'Other' },
+      { value: 'Suspended', label: 'Suspended' },
+    ],
+  },
 
-]
-
-    },
-
-    application_status: { type: 'enum', label: 'Application Status',
-
-    options: [
-
-    { value: 'Pending', label: 'Pending' },
-
-    { value: 'Approved', label: 'Approved' },
-
-    { value: 'Rejected', label: 'Rejected' },
-
-    { value: 'Suspended', label: 'Suspended' },
-
-]
-
-    },
-
-    language: { type: 'enum', label: 'Language',
+  language: {
+    type: 'enum',
+    label: 'Language',
 
     options: [
+      { value: 'Telugu', label: 'Telugu' },
 
-    { value: 'Telugu', label: 'Telugu' },
+      { value: 'Other', label: 'Other' },
+    ],
+  },
 
-    { value: 'Other', label: 'Other' },
+  online_pujas: {
+    type: 'boolean',
+    label: 'Online Pujas',
 
-]
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    },
+  travel: {
+    type: 'boolean',
+    label: 'Travel',
 
-    online_pujas: { type: 'boolean', label: 'Online Pujas',
+    options: [{ value: 'value', label: 'value' }],
+  },
 
-    options: [
+  city: {
+    type: 'string',
+    label: 'City',
 
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    travel: { type: 'boolean', label: 'Travel',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-    city: { type: 'string', label: 'City',
-
-    options: [
-
-    { value: 'value', label: 'value' },
-
-]
-
-    },
-
-}
+    options: [{ value: 'value', label: 'value' }],
+  },
+};
 
 export default pujari_applicationsFields;

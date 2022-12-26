@@ -1,4 +1,3 @@
-
 const db = require('../models');
 const FileDBApi = require('./file');
 const crypto = require('crypto');
@@ -8,78 +7,37 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 module.exports = class KarusersDBApi {
-
   static async create(data, options) {
-  const currentUser = (options && options.currentUser) || { id: null };
-  const transaction = (options && options.transaction) || undefined;
+    const currentUser = (options && options.currentUser) || { id: null };
+    const transaction = (options && options.transaction) || undefined;
 
-  const karusers = await db.karusers.create(
-  {
-  id: data.id || undefined,
+    const karusers = await db.karusers.create(
+      {
+        id: data.id || undefined,
 
-    name: data.name
-    ||
-    null
-,
+        name: data.name || null,
+        surname: data.surname || null,
+        date_of_birth: data.date_of_birth || null,
+        date_of_registration: data.date_of_registration || null,
+        address: data.address || null,
+        gothram: data.gothram || null,
+        nakshatram: data.nakshatram || null,
+        email_id: data.email_id || null,
+        gender: data.gender || null,
+        is_karishye_sourced: data.is_karishye_sourced || false,
 
-    surname: data.surname
-    ||
-    null
-,
+        importHash: data.importHash || null,
+        createdById: currentUser.id,
+        updatedById: currentUser.id,
+      },
+      { transaction },
+    );
 
-    date_of_birth: data.date_of_birth
-    ||
-    null
-,
-
-    date_of_registration: data.date_of_registration
-    ||
-    null
-,
-
-    address: data.address
-    ||
-    null
-,
-
-    gothram: data.gothram
-    ||
-    null
-,
-
-    nakshatram: data.nakshatram
-    ||
-    null
-,
-
-    email_id: data.email_id
-    ||
-    null
-,
-
-    gender: data.gender
-    ||
-    null
-,
-
-    is_karishye_sourced: data.is_karishye_sourced
-    ||
-    false
-
-,
-
-  importHash: data.importHash || null,
-  createdById: currentUser.id,
-  updatedById: currentUser.id,
-  },
-  { transaction },
-  );
-
-  return karusers;
+    return karusers;
   }
 
   static async update(id, data, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const karusers = await db.karusers.findByPk(id, {
@@ -88,80 +46,42 @@ module.exports = class KarusersDBApi {
 
     await karusers.update(
       {
-
-        name: data.name
-        ||
-        null
-,
-
-        surname: data.surname
-        ||
-        null
-,
-
-        date_of_birth: data.date_of_birth
-        ||
-        null
-,
-
-        date_of_registration: data.date_of_registration
-        ||
-        null
-,
-
-        address: data.address
-        ||
-        null
-,
-
-        gothram: data.gothram
-        ||
-        null
-,
-
-        nakshatram: data.nakshatram
-        ||
-        null
-,
-
-        email_id: data.email_id
-        ||
-        null
-,
-
-        gender: data.gender
-        ||
-        null
-,
-
-        is_karishye_sourced: data.is_karishye_sourced
-        ||
-        false
-
-,
+        name: data.name || null,
+        surname: data.surname || null,
+        date_of_birth: data.date_of_birth || null,
+        date_of_registration: data.date_of_registration || null,
+        address: data.address || null,
+        gothram: data.gothram || null,
+        nakshatram: data.nakshatram || null,
+        email_id: data.email_id || null,
+        gender: data.gender || null,
+        is_karishye_sourced: data.is_karishye_sourced || false,
 
         updatedById: currentUser.id,
       },
-      {transaction},
+      { transaction },
     );
 
     return karusers;
   }
 
   static async remove(id, options) {
-    const currentUser = (options && options.currentUser) || {id: null};
+    const currentUser = (options && options.currentUser) || { id: null };
     const transaction = (options && options.transaction) || undefined;
 
     const karusers = await db.karusers.findByPk(id, options);
 
-    await karusers.update({
-      deletedBy: currentUser.id
-    }, {
-      transaction,
-    });
+    await karusers.update(
+      {
+        deletedBy: currentUser.id,
+      },
+      {
+        transaction,
+      },
+    );
 
     await karusers.destroy({
-      transaction
+      transaction,
     });
 
     return karusers;
@@ -170,16 +90,13 @@ module.exports = class KarusersDBApi {
   static async findBy(where, options) {
     const transaction = (options && options.transaction) || undefined;
 
-    const karusers = await db.karusers.findOne(
-      { where },
-      { transaction },
-    );
+    const karusers = await db.karusers.findOne({ where }, { transaction });
 
     if (!karusers) {
       return karusers;
     }
 
-    const output = karusers.get({plain: true});
+    const output = karusers.get({ plain: true });
 
     return output;
   }
@@ -195,9 +112,7 @@ module.exports = class KarusersDBApi {
 
     const transaction = (options && options.transaction) || undefined;
     let where = {};
-    let include = [
-
-    ];
+    let include = [];
 
     if (filter) {
       if (filter.id) {
@@ -210,66 +125,42 @@ module.exports = class KarusersDBApi {
       if (filter.name) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'karusers',
-            'name',
-            filter.name,
-          ),
+          [Op.and]: Utils.ilike('karusers', 'name', filter.name),
         };
       }
 
       if (filter.surname) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'karusers',
-            'surname',
-            filter.surname,
-          ),
+          [Op.and]: Utils.ilike('karusers', 'surname', filter.surname),
         };
       }
 
       if (filter.address) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'karusers',
-            'address',
-            filter.address,
-          ),
+          [Op.and]: Utils.ilike('karusers', 'address', filter.address),
         };
       }
 
       if (filter.gothram) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'karusers',
-            'gothram',
-            filter.gothram,
-          ),
+          [Op.and]: Utils.ilike('karusers', 'gothram', filter.gothram),
         };
       }
 
       if (filter.nakshatram) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'karusers',
-            'nakshatram',
-            filter.nakshatram,
-          ),
+          [Op.and]: Utils.ilike('karusers', 'nakshatram', filter.nakshatram),
         };
       }
 
       if (filter.email_id) {
         where = {
           ...where,
-          [Op.and]: Utils.ilike(
-            'karusers',
-            'email_id',
-            filter.email_id,
-          ),
+          [Op.and]: Utils.ilike('karusers', 'email_id', filter.email_id),
         };
       }
 
@@ -329,9 +220,7 @@ module.exports = class KarusersDBApi {
       ) {
         where = {
           ...where,
-          active:
-            filter.active === true ||
-            filter.active === 'true',
+          active: filter.active === true || filter.active === 'true',
         };
       }
 
@@ -374,24 +263,23 @@ module.exports = class KarusersDBApi {
       }
     }
 
-    let { rows, count } = await db.karusers.findAndCountAll(
-      {
-        where,
-        include,
-        distinct: true,
-        limit: limit ? Number(limit) : undefined,
-        offset: offset ? Number(offset) : undefined,
-        order: (filter.field && filter.sort)
+    let { rows, count } = await db.karusers.findAndCountAll({
+      where,
+      include,
+      distinct: true,
+      limit: limit ? Number(limit) : undefined,
+      offset: offset ? Number(offset) : undefined,
+      order:
+        filter.field && filter.sort
           ? [[filter.field, filter.sort]]
           : [['createdAt', 'desc']],
-        transaction,
-      },
-    );
+      transaction,
+    });
 
-//    rows = await this._fillWithRelationsAndFilesForRows(
-//      rows,
-//      options,
-//    );
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
@@ -403,17 +291,13 @@ module.exports = class KarusersDBApi {
       where = {
         [Op.or]: [
           { ['id']: Utils.uuid(query) },
-          Utils.ilike(
-            'karusers',
-            'id',
-            query,
-          ),
+          Utils.ilike('karusers', 'id', query),
         ],
       };
     }
 
     const records = await db.karusers.findAll({
-      attributes: [ 'id', 'id' ],
+      attributes: ['id', 'id'],
       where,
       limit: limit ? Number(limit) : undefined,
       orderBy: [['id', 'ASC']],
@@ -424,6 +308,4 @@ module.exports = class KarusersDBApi {
       label: record.id,
     }));
   }
-
 };
-

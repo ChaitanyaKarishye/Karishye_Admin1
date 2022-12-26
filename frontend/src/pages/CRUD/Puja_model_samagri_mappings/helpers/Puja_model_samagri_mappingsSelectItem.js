@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 
 async function selectList(query, limit) {
   const params = { query, limit };
-  const response = await axios.get(`/puja_model_samagri_mappings/autocomplete`, { params });
+  const response = await axios.get(
+    `/puja_model_samagri_mappings/autocomplete`,
+    { params },
+  );
   return response.data;
 }
 
@@ -50,10 +53,7 @@ const Puja_model_samagri_mappingsSelectItem = (props) => {
     },
   };
 
-  const {
-    form,
-    ...rest
-  } = props;
+  const { form, ...rest } = props;
 
   return (
     <React.Fragment>
@@ -66,12 +66,11 @@ const Puja_model_samagri_mappingsSelectItem = (props) => {
       />
     </React.Fragment>
   );
-}
+};
 
 const select = (state) => ({
-  hasPermissionToCreate: state.puja_model_samagri_mappings.hasPermissionToCreate
+  hasPermissionToCreate:
+    state.puja_model_samagri_mappings.hasPermissionToCreate,
 });
 
-export default connect(select)(
-  Puja_model_samagri_mappingsSelectItem,
-);
+export default connect(select)(Puja_model_samagri_mappingsSelectItem);

@@ -28,153 +28,140 @@ import Widget from 'components/Widget';
 import PujasSelectItem from 'pages/CRUD/Pujas/helpers/PujasSelectItem';
 
 const Puja_modelsForm = (props) => {
-
   const {
-  isEditing,
-  isProfile,
-  findLoading,
-  saveLoading,
-  record,
-  onSubmit,
-  onCancel,
-  modal
+    isEditing,
+    isProfile,
+    findLoading,
+    saveLoading,
+    record,
+    onSubmit,
+    onCancel,
+    modal,
   } = props;
 
   const iniValues = () => {
-  return IniValues(puja_modelsFields, record || {});
-  }
+    return IniValues(puja_modelsFields, record || {});
+  };
 
   const formValidations = () => {
-  return FormValidations(puja_modelsFields, record || {});
-  }
+    return FormValidations(puja_modelsFields, record || {});
+  };
 
   const handleSubmit = (values) => {
-  const { id, ...data } = PreparedValues(puja_modelsFields, values || {});
-  onSubmit(id, data);
+    const { id, ...data } = PreparedValues(puja_modelsFields, values || {});
+    onSubmit(id, data);
   };
 
   const title = () => {
-  if(isProfile) {
-  return 'Edit My Profile';
-  }
+    if (isProfile) {
+      return 'Edit My Profile';
+    }
 
-  return isEditing
-  ? 'Edit Puja_models'
-  : 'Add Puja_models';
+    return isEditing ? 'Edit Puja_models' : 'Add Puja_models';
   };
 
   const renderForm = () => (
-  <Widget title={<h4>{title()}</h4>} collapse close>
-  <Formik
-          onSubmit={handleSubmit}
-  initialValues={iniValues()}
-  validationSchema={formValidations()}
-  >
-  {(form) => (
-  <form onSubmit={form.handleSubmit}>
-    <Grid container spacing={3} direction="column">
-
-      <Grid item>
-        <InputFormItem
-          name={'duration'}
-          schema={puja_modelsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'pujari_cost'}
-          schema={puja_modelsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'no_of_pujaris'}
-          schema={puja_modelsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'model_selling_price'}
-          schema={puja_modelsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'advance_amount'}
-          schema={puja_modelsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <SwitchFormItem
-          name={'is_popular_model'}
-          schema={puja_modelsFields}
-        />
-      </Grid>
-
-      <Grid item>
-        <PujasSelectItem
-        name={'puja_id'}
-        schema={puja_modelsFields}
-        showCreate={!modal}
-        form={form}
-        />
-      </Grid>
-
-      <Grid item>
-        <InputFormItem
-          name={'name'}
-          schema={puja_modelsFields}
-
-        />
-      </Grid>
-
-  </Grid>
-  <Grid container spacing={3} mt={2}>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="contained"
-        onClick={form.handleSubmit}
+    <Widget title={<h4>{title()}</h4>} collapse close>
+      <Formik
+        onSubmit={handleSubmit}
+        initialValues={iniValues()}
+        validationSchema={formValidations()}
       >
-        Save
-      </Button>
-    </Grid>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="outlined"
-        onClick={form.handleReset}
-      >
-        Reset
-      </Button>
-    </Grid>
-    <Grid item>
-      <Button
-        color="primary"
-        variant="outlined"
-        onClick={() => onCancel()}
-      >
-        Cancel
-      </Button>
-    </Grid>
-  </Grid>
-      </form>
-      )
-      }
-    </Formik>
-  </Widget>
+        {(form) => (
+          <form onSubmit={form.handleSubmit}>
+            <Grid container spacing={3} direction='column'>
+              <Grid item>
+                <InputFormItem name={'duration'} schema={puja_modelsFields} />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem
+                  name={'pujari_cost'}
+                  schema={puja_modelsFields}
+                />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem
+                  name={'no_of_pujaris'}
+                  schema={puja_modelsFields}
+                />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem
+                  name={'model_selling_price'}
+                  schema={puja_modelsFields}
+                />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem
+                  name={'advance_amount'}
+                  schema={puja_modelsFields}
+                />
+              </Grid>
+
+              <Grid item>
+                <SwitchFormItem
+                  name={'is_popular_model'}
+                  schema={puja_modelsFields}
+                />
+              </Grid>
+
+              <Grid item>
+                <PujasSelectItem
+                  name={'puja_id'}
+                  schema={puja_modelsFields}
+                  showCreate={!modal}
+                  form={form}
+                />
+              </Grid>
+
+              <Grid item>
+                <InputFormItem name={'name'} schema={puja_modelsFields} />
+              </Grid>
+            </Grid>
+            <Grid container spacing={3} mt={2}>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='contained'
+                  onClick={form.handleSubmit}
+                >
+                  Save
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='outlined'
+                  onClick={form.handleReset}
+                >
+                  Reset
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button
+                  color='primary'
+                  variant='outlined'
+                  onClick={() => onCancel()}
+                >
+                  Cancel
+                </Button>
+              </Grid>
+            </Grid>
+          </form>
+        )}
+      </Formik>
+    </Widget>
   );
   if (findLoading) {
-  return <Loader />;
+    return <Loader />;
   }
   if (isEditing && !record) {
-  return <Loader />;
+    return <Loader />;
   }
   return renderForm();
-  }
-  export default Puja_modelsForm;
+};
+export default Puja_modelsForm;

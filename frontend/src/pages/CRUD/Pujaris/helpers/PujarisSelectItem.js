@@ -50,10 +50,7 @@ const PujarisSelectItem = (props) => {
     },
   };
 
-  const {
-    form,
-    ...rest
-  } = props;
+  const { form, ...rest } = props;
 
   return (
     <React.Fragment>
@@ -66,12 +63,10 @@ const PujarisSelectItem = (props) => {
       />
     </React.Fragment>
   );
-}
+};
 
 const select = (state) => ({
-  hasPermissionToCreate: state.pujaris.hasPermissionToCreate
+  hasPermissionToCreate: state.pujaris.hasPermissionToCreate,
 });
 
-export default connect(select)(
-  PujarisSelectItem,
-);
+export default connect(select)(PujarisSelectItem);

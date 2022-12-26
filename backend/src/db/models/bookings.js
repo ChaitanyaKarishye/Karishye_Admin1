@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const bookings = sequelize.define(
     'bookings',
     {
@@ -14,101 +14,84 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
       },
 
-user_id: {
+      user_id: {
         type: DataTypes.INTEGER,
-
       },
 
-pujari_id: {
+      pujari_id: {
         type: DataTypes.INTEGER,
-
       },
 
-puja_id: {
+      puja_id: {
         type: DataTypes.INTEGER,
-
       },
 
-notes: {
+      notes: {
         type: DataTypes.TEXT,
-
       },
 
-price: {
+      price: {
         type: DataTypes.INTEGER,
-
       },
 
-event_type: {
+      event_type: {
         type: DataTypes.ENUM,
 
         values: [
+          'At my home',
 
-"At my home",
+          'Near my home',
 
-"Near my home",
+          'Online',
 
-"Online",
+          'On your behalf',
 
-"On your behalf",
-
-"Other"
-
+          'Other',
         ],
-
       },
 
-address: {
+      address: {
         type: DataTypes.TEXT,
-
       },
 
-start_date: {
+      start_date: {
         type: DataTypes.DATE,
-
       },
 
-end_date: {
+      end_date: {
         type: DataTypes.DATE,
-
       },
 
-duration_hrs: {
+      duration_hrs: {
         type: DataTypes.INTEGER,
-
       },
 
-base_price: {
+      base_price: {
         type: DataTypes.INTEGER,
-
       },
 
-final_price: {
+      final_price: {
         type: DataTypes.INTEGER,
-
       },
 
-status: {
+      status: {
         type: DataTypes.ENUM,
 
         values: [
+          'under review',
 
-"under review",
+          'pending payment',
 
-"pending payment",
+          'confirmed',
 
-"confirmed",
+          'material dispatched',
 
-"material dispatched",
+          'completed',
 
-"completed",
+          'suspended',
 
-"suspended",
-
-"cancelled"
-
+          'cancelled',
         ],
-
       },
 
       importHash: {
@@ -125,7 +108,6 @@ status: {
   );
 
   bookings.associate = (db) => {
-
     db.bookings.belongsTo(db.users, {
       as: 'createdBy',
     });
@@ -137,4 +119,3 @@ status: {
 
   return bookings;
 };
-
